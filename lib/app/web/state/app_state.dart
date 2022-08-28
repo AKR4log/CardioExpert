@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppStateWeb extends ChangeNotifier {
-  late bool _isBusy;
+  bool _isBusy;
   bool get isbusy => _isBusy;
   set loading(bool value) {
     _isBusy = value;

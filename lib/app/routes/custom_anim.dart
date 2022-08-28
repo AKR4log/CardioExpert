@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomRoute<T> extends MaterialPageRoute<T> {
-  CustomRoute({required WidgetBuilder builder, RouteSettings? settings})
+  CustomRoute({WidgetBuilder builder, RouteSettings settings})
       : super(builder: builder, settings: settings);
 
   @override
@@ -17,7 +17,7 @@ class CustomRoute<T> extends MaterialPageRoute<T> {
 }
 
 class SlideLeftRoute<T> extends MaterialPageRoute<T> {
-  SlideLeftRoute({required WidgetBuilder builder, RouteSettings? settings})
+  SlideLeftRoute({WidgetBuilder builder, RouteSettings settings})
       : super(builder: builder, settings: settings);
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,

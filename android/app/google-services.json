@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "73182718789",
+    "project_id": "cardioexpert-6dc41",
+    "storage_bucket": "cardioexpert-6dc41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73182718789:android:5674d32a7542afdbf86c2c",
+        "android_client_info": {
+          "package_name": "com.akr4log.cardio_expert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73182718789-i9va64vdlgq6kuml58vvgqd6d7e5dfvm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0gl7Znp66l9rN_9JeN4T9evzNya8h8EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73182718789-i9va64vdlgq6kuml58vvgqd6d7e5dfvm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
