@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'app/database/firebase.dart';
+import 'app/mobile/state/app_state.dart';
+import 'app/mobile/state/main_state.dart';
 import 'app/routes/routes.dart';
 import 'firebase_options.dart';
 
@@ -39,13 +42,24 @@ class MyApp extends StatelessWidget {
               //   // '/home': (context) => const MainScreen(),
               // },
               debugShowCheckedModeBanner: false,
-              title: 'Case Clever',
+              title: 'CardioExpert',
             ))
-        : MaterialApp(
-            debugShowCheckedModeBanner: false,
-            routes: Routes.route(),
-            onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
-            initialRoute: "SplashPage",
+        : MultiProvider(
+            providers: [
+              ChangeNotifierProvider<AppStateMobile>(
+                  create: (_) => AppStateMobile()),
+              ChangeNotifierProvider<Cloud>(create: (_) => Cloud()),
+              ChangeNotifierProvider<MainStateMobile>(
+                  create: (_) => MainStateMobile()),
+            ],
+            child: MaterialApp(
+              theme: ThemeData(fontFamily: 'Montserrat'),
+              title: 'CardioExpert',
+              debugShowCheckedModeBanner: false,
+              routes: Routes.route(),
+              onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
+              initialRoute: "SplashPage",
+            ),
           );
   }
 }

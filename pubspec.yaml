@@ -18,7 +18,9 @@ dependencies:
   # firebase_storage: ^10.3.6
 
   provider: ^6.0.3
+  shared_preferences: ^2.0.15
   uuid: ^3.0.6
+  flutter_multi_formatter: ^2.5.7
   
   # cached_network_image: ^3.2.1
   # flutter_cache_manager: ^3.3.0
@@ -36,17 +38,18 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-    # - assets/fonts/
-    # - assets/img/
+  assets:
+    - assets/font/
+    - assets/img/
 
-  # fonts:
-  #   - family: ReadexPro
-  #     fonts:
-  #       - asset: assets/fonts/ReadexPro-VariableFont_wght.ttf
-  #   - family: DMSans
-  #     fonts:
-  #       - asset: assets/fonts/DMSans-Bold.ttf
-  #         weight: 700
-  #       - asset: assets/fonts/DMSans-Regular.ttf
-  #         weight: 400
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/font/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/font/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/font/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/font/Montserrat-Regular.ttf
+          weight: 500

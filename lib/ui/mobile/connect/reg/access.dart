@@ -1,23 +1,23 @@
-import 'package:cardio_expert/ui/mobile/connect/reg/reg.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../app/database/firebase.dart';
+import '../../../../app/database/firebase.dart';
 
-class ConnectPage extends StatefulWidget {
-  const ConnectPage({Key key}) : super(key: key);
+class Access extends StatefulWidget {
+  const Access({Key key}) : super(key: key);
 
   @override
-  State<ConnectPage> createState() => _ConnectPageState();
+  State<Access> createState() => _AccessState();
 }
 
-class _ConnectPageState extends State<ConnectPage> {
-  TextEditingController controllerEmail;
+class _AccessState extends State<Access> {
   TextEditingController controllerPassword;
 
   @override
   void initState() {
-    controllerEmail = TextEditingController();
     controllerPassword = TextEditingController();
     super.initState();
   }
@@ -30,6 +30,8 @@ class _ConnectPageState extends State<ConnectPage> {
       body: SingleChildScrollView(
           child: Column(children: [
         Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(bottom: 19),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius:
@@ -56,58 +58,19 @@ class _ConnectPageState extends State<ConnectPage> {
                   'Добро пожаловать !',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 19, bottom: 19),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      // TextButton(onPressed: () {}, child: const Text('Войти')),
-                      TextButton(
-                          onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      const RegPage())),
-                          child: const Text('Зарегистрироваться')),
-                    ],
-                  ),
-                )
               ]),
         ),
         const SizedBox(height: 23),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 23, vertical: 5),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Email:',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
-              TextField(
-                controller: controllerEmail,
-                keyboardType: TextInputType.emailAddress,
-                style: const TextStyle(color: Colors.black, fontSize: 14),
-                decoration: const InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromRGBO(66, 76, 109, 1))),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 23, vertical: 5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Пароль:',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
+              const Text('Придумайте пароль:',
+                  style: TextStyle(
+                      color: Color.fromRGBO(111, 111, 111, 1),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500)),
               TextField(
                 controller: controllerPassword,
                 obscureText: true,
@@ -132,9 +95,21 @@ class _ConnectPageState extends State<ConnectPage> {
         ),
         const SizedBox(height: 35),
         TextButton(
-            onPressed: () {
-              cloud.signInUser(context, controllerEmail.text.trim(),
-                  controllerPassword.text.trim());
+            onPressed: () async {
+              var password = await getPassword();
+              if (password != controllerPassword.text.trim()) {}
+              var name = await getName();
+              var surname = await getSurname();
+              var age = await getAge();
+              var nameDoctor = await getFullNameDoctor();
+              var phoneDoctor = await getPhoneDoctor();
+              var email = await getEmail();
+              cloud.createNewUser(context, password, email,
+                  name: name,
+                  surname: surname,
+                  age: age,
+                  doctorName: nameDoctor,
+                  doctorPhone: phoneDoctor);
             },
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -146,12 +121,18 @@ class _ConnectPageState extends State<ConnectPage> {
               padding: MaterialStateProperty.all(
                   const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
             ),
-            child: const Text('Войти',
+            child: const Text('Далее',
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     color: Colors.white))),
       ])),
     );
+  }
+
+  @override
+  void dispose() {
+    controllerPassword?.dispose();
+    super.dispose();
   }
 }

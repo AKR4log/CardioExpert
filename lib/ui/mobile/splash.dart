@@ -1,7 +1,10 @@
+import 'package:cardio_expert/ui/mobile/connect/connect.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../app/enum.dart';
 import '../../app/mobile/state/main_state.dart';
+import 'home/home.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key key}) : super(key: key);
@@ -20,9 +23,9 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void timer() async {
-    Future.delayed(const Duration(seconds: 1)).then((_) {
-      // var state = Provider.of<MainStateMobile>(context, listen: false);
-      // state.getCurrentUser(context);
+    Future.delayed(const Duration(seconds: 3)).then((_) {
+      var state = Provider.of<MainStateMobile>(context, listen: false);
+      state.getCurrentUser(context: context);
     });
   }
 
@@ -38,10 +41,8 @@ class _SplashPageState extends State<SplashPage> {
           Container(
             margin: const EdgeInsets.only(top: 24),
             child: const Text(
-              'FERROCARRIL',
+              'CardioExpert',
               style: TextStyle(
-                fontFamily: "MontserratAlternates",
-                inherit: false,
                 color: Colors.white,
                 fontSize: 38,
                 fontWeight: FontWeight.w700,
@@ -55,15 +56,13 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    // var state = Provider.of<MainStateMobile>(context);
+    var state = Provider.of<MainStateMobile>(context);
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(14, 16, 23, 1),
-      // body: state.authStatus == AuthStatus.NOT_DETERMINED
-      //     ? _body()
-      //     : state.authStatus == AuthStatus.NOT_LOGGED_IN
-      //         ? LoginPage()
-      //         : const HomePage());
-      body: _body(),
-    );
+        backgroundColor: const Color.fromRGBO(14, 16, 23, 1),
+        body: state.authStatus == AuthStatus.NOT_DETERMINED
+            ? _body()
+            : state.authStatus == AuthStatus.NOT_LOGGED_IN
+                ? const ConnectPage()
+                : const HomePage());
   }
 }
