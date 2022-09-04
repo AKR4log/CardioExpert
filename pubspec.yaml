@@ -20,7 +20,10 @@ dependencies:
   provider: ^6.0.3
   shared_preferences: ^2.0.15
   uuid: ^3.0.6
+  flutter_share: ^2.0.0
+  pdf: ^3.8.3
   flutter_multi_formatter: ^2.5.7
+  path_provider: ^2.0.11
   
   # cached_network_image: ^3.2.1
   # flutter_cache_manager: ^3.3.0

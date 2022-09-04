@@ -1,3 +1,4 @@
+import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
 
 class ControlPulse extends StatefulWidget {
@@ -134,7 +135,7 @@ class _ControlPulseState extends State<ControlPulse> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => shareFile(),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
