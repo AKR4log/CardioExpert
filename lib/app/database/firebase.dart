@@ -72,13 +72,13 @@ class Cloud extends AppStateMobile {
     await Firebase.initializeApp();
     try {
       refU
-          .doc(user.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('control_weight')
           .doc(const Uuid().v4())
           .set({
         'weight': weight,
         'height': height,
-        'date': DateTime.now().toUtc().toString()
+        'date': DateTime.now()
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -91,13 +91,13 @@ class Cloud extends AppStateMobile {
     await Firebase.initializeApp();
     try {
       refU
-          .doc(user.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('control_blood')
           .doc(const Uuid().v4())
           .set({
         'upper': upper,
         'lower': lower,
-        'date': DateTime.now().toUtc().toString()
+        'date': DateTime.now()
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -109,14 +109,12 @@ class Cloud extends AppStateMobile {
     await Firebase.initializeApp();
     try {
       refU
-          .doc(user.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('control_pulse')
           .doc(const Uuid().v4())
-          .set({
-        'pulse': pulse,
-        'date': DateTime.now().toUtc().toString()
-      }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage())));
+          .set({'pulse': pulse, 'date': DateTime.now()}).whenComplete(() =>
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage())));
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -125,11 +123,13 @@ class Cloud extends AppStateMobile {
   Future<void> createCntrlMno(BuildContext context, String mno) async {
     await Firebase.initializeApp();
     try {
-      refU.doc(user.uid).collection('control_mno').doc(const Uuid().v4()).set({
-        'mno': mno,
-        'date': DateTime.now().toUtc().toString()
-      }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => const HomePage())));
+      refU
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .collection('control_mno')
+          .doc(const Uuid().v4())
+          .set({'mno': mno, 'date': DateTime.now()}).whenComplete(() =>
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage())));
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -140,7 +140,7 @@ class Cloud extends AppStateMobile {
     await Firebase.initializeApp();
     try {
       refU
-          .doc(user.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('lipid_profile')
           .doc(const Uuid().v4())
           .set({
@@ -148,7 +148,7 @@ class Cloud extends AppStateMobile {
         'ldl': ldl,
         'hdl': hdl,
         'triglycerides': triglycerides,
-        'date': DateTime.now().toUtc().toString()
+        'date': DateTime.now()
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -160,13 +160,17 @@ class Cloud extends AppStateMobile {
       String name, String dosage) async {
     await Firebase.initializeApp();
     try {
-      refU.doc(user.uid).collection('medications').doc(const Uuid().v4()).set({
+      refU
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .collection('medications')
+          .doc(const Uuid().v4())
+          .set({
         'reception_time': reception_time,
         'name': name,
         'dosage': dosage,
-        'date': DateTime.now().toUtc().toString()
+        'date': DateTime.now()
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => const HomePage())));
+              builder: (BuildContext context) => const HomePage())));
     } catch (e) {
       debugPrint(e.toString());
     }

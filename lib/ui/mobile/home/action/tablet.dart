@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../app/database/firebase.dart';
 
 class AddTablet extends StatefulWidget {
   const AddTablet({Key key}) : super(key: key);
@@ -9,8 +12,21 @@ class AddTablet extends StatefulWidget {
 }
 
 class _AddTabletState extends State<AddTablet> {
+  TextEditingController controllerRecTime = TextEditingController();
+  TextEditingController controllerName = TextEditingController();
+  TextEditingController controllerDosage = TextEditingController();
+
+  @override
+  void initState() {
+    controllerDosage = TextEditingController();
+    controllerName = TextEditingController();
+    controllerRecTime = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var cloud = Provider.of<Cloud>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,12 +59,13 @@ class _AddTabletState extends State<AddTablet> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerName,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: 'Препарат...',
@@ -77,12 +94,13 @@ class _AddTabletState extends State<AddTablet> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerDosage,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -102,7 +120,7 @@ class _AddTabletState extends State<AddTablet> {
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Время приёма',
                   style: TextStyle(
                       fontSize: 13,
@@ -112,6 +130,7 @@ class _AddTabletState extends State<AddTablet> {
                 SizedBox(
                   width: 120,
                   child: TextField(
+                    controller: controllerRecTime,
                     style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 30,
@@ -135,7 +154,11 @@ class _AddTabletState extends State<AddTablet> {
           Container(
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => cloud.createMedication(
+                    context,
+                    controllerRecTime.text.trim(),
+                    controllerName.text.trim(),
+                    controllerDosage.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -155,5 +178,13 @@ class _AddTabletState extends State<AddTablet> {
         ]),
       )),
     );
+  }
+
+  @override
+  void dispose() {
+    controllerDosage?.dispose();
+    controllerName?.dispose();
+    controllerRecTime?.dispose();
+    super.dispose();
   }
 }

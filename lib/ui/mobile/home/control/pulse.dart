@@ -1,5 +1,8 @@
 import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../app/database/firebase.dart';
 
 class ControlPulse extends StatefulWidget {
   const ControlPulse({Key key}) : super(key: key);
@@ -9,8 +12,17 @@ class ControlPulse extends StatefulWidget {
 }
 
 class _ControlPulseState extends State<ControlPulse> {
+  TextEditingController controllerPulse = TextEditingController();
+
+  @override
+  void initState() {
+    controllerPulse = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var cloud = Provider.of<Cloud>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,12 +55,13 @@ class _ControlPulseState extends State<ControlPulse> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerPulse,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -114,7 +127,8 @@ class _ControlPulseState extends State<ControlPulse> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => cloud.createCntrlPulse(
+                    context, controllerPulse.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -135,7 +149,7 @@ class _ControlPulseState extends State<ControlPulse> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () => shareFile(),
+                onPressed: () => sharePulse(controllerPulse.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

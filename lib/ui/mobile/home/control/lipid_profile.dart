@@ -1,4 +1,8 @@
+import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../app/database/firebase.dart';
 
 class LipidProfile extends StatefulWidget {
   const LipidProfile({Key key}) : super(key: key);
@@ -8,8 +12,23 @@ class LipidProfile extends StatefulWidget {
 }
 
 class _LipidProfileState extends State<LipidProfile> {
+  TextEditingController controllerCholesterol;
+  TextEditingController controllerLdl;
+  TextEditingController controllerHdl;
+  TextEditingController controllerTriglycerides;
+
+  @override
+  void initState() {
+    controllerCholesterol = TextEditingController();
+    controllerHdl = TextEditingController();
+    controllerLdl = TextEditingController();
+    controllerTriglycerides = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var cloud = Provider.of<Cloud>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,12 +62,13 @@ class _LipidProfileState extends State<LipidProfile> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerCholesterol,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -78,12 +98,13 @@ class _LipidProfileState extends State<LipidProfile> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerLdl,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -113,12 +134,13 @@ class _LipidProfileState extends State<LipidProfile> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerHdl,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -148,12 +170,13 @@ class _LipidProfileState extends State<LipidProfile> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerTriglycerides,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -173,7 +196,12 @@ class _LipidProfileState extends State<LipidProfile> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => cloud.createCntrlLipidProfile(
+                    context,
+                    controllerCholesterol.text.trim(),
+                    controllerLdl.text.trim(),
+                    controllerHdl.text.trim(),
+                    controllerTriglycerides.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -194,7 +222,11 @@ class _LipidProfileState extends State<LipidProfile> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => shareLipidProfile(
+                    controllerCholesterol.text.trim(),
+                    controllerLdl.text.trim(),
+                    controllerHdl.text.trim(),
+                    controllerTriglycerides.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -238,5 +270,14 @@ class _LipidProfileState extends State<LipidProfile> {
         ]),
       )),
     );
+  }
+
+  @override
+  void dispose() {
+    controllerCholesterol?.dispose();
+    controllerHdl?.dispose();
+    controllerLdl?.dispose();
+    controllerTriglycerides?.dispose();
+    super.dispose();
   }
 }

@@ -1,4 +1,8 @@
+import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../app/database/firebase.dart';
 
 class ControlMno extends StatefulWidget {
   const ControlMno({Key key}) : super(key: key);
@@ -8,8 +12,17 @@ class ControlMno extends StatefulWidget {
 }
 
 class _ControlMnoState extends State<ControlMno> {
+  TextEditingController controllerMno = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    controllerMno = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var cloud = Provider.of<Cloud>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -42,12 +55,13 @@ class _ControlMnoState extends State<ControlMno> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerMno,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -67,7 +81,8 @@ class _ControlMnoState extends State<ControlMno> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () =>
+                    cloud.createCntrlMno(context, controllerMno.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -88,7 +103,7 @@ class _ControlMnoState extends State<ControlMno> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => shareMno(controllerMno.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -132,5 +147,11 @@ class _ControlMnoState extends State<ControlMno> {
         ]),
       )),
     );
+  }
+
+  @override
+  void dispose() {
+    controllerMno?.dispose();
+    super.dispose();
   }
 }

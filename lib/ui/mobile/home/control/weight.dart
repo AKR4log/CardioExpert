@@ -1,4 +1,8 @@
+import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../app/database/firebase.dart';
 
 class ControlWeight extends StatefulWidget {
   const ControlWeight({Key key}) : super(key: key);
@@ -8,8 +12,19 @@ class ControlWeight extends StatefulWidget {
 }
 
 class _ControlWeightState extends State<ControlWeight> {
+  TextEditingController controllerWeight = TextEditingController();
+  TextEditingController controllerHeight = TextEditingController();
+
+  @override
+  void initState() {
+    controllerHeight = TextEditingController();
+    controllerWeight = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var cloud = Provider.of<Cloud>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -42,12 +57,13 @@ class _ControlWeightState extends State<ControlWeight> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerWeight,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -76,12 +92,13 @@ class _ControlWeightState extends State<ControlWeight> {
                         fontSize: 13,
                       )),
                 ),
-                const TextField(
-                  style: TextStyle(
+                TextField(
+                  controller: controllerHeight,
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     hintText: '123',
@@ -123,7 +140,8 @@ class _ControlWeightState extends State<ControlWeight> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => cloud.createCntrlWeight(context,
+                    controllerWeight.text.trim(), controllerHeight.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -144,7 +162,8 @@ class _ControlWeightState extends State<ControlWeight> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => shareWeight(
+                    controllerWeight.text.trim(), controllerHeight.text.trim()),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -185,5 +204,12 @@ class _ControlWeightState extends State<ControlWeight> {
         ]),
       )),
     );
+  }
+
+  @override
+  void dispose() {
+    controllerHeight?.dispose();
+    controllerWeight?.dispose();
+    super.dispose();
   }
 }

@@ -5,6 +5,7 @@ import 'package:cardio_expert/ui/mobile/home/control/lipid_profile.dart';
 import 'package:cardio_expert/ui/mobile/home/control/mno.dart';
 import 'package:cardio_expert/ui/mobile/home/control/pulse.dart';
 import 'package:cardio_expert/ui/mobile/home/control/weight.dart';
+import 'package:cardio_expert/ui/mobile/home/reports.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -317,6 +318,35 @@ class _HomePageState extends State<HomePage> {
                             Flexible(
                                 child: Image.asset('assets/img/radial.png'))
                           ]),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
+                    child: TextButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          side: const BorderSide(
+                              color: Color.fromRGBO(229, 231, 235, 1)),
+                          borderRadius: BorderRadius.circular(15),
+                        )),
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color.fromRGBO(242, 242, 242, 1)),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                vertical: 18, horizontal: 22)),
+                      ),
+                      onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ReportsPage())),
+                      child: const Text('Отчёты',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black)),
                     ),
                   ),
                 ],
