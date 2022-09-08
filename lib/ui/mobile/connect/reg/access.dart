@@ -15,6 +15,7 @@ class Access extends StatefulWidget {
 
 class _AccessState extends State<Access> {
   TextEditingController controllerPassword;
+  bool noAccess = false;
 
   @override
   void initState() {
@@ -66,7 +67,7 @@ class _AccessState extends State<Access> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Придумайте пароль:',
+              const Text('Повторите пароль:',
                   style: TextStyle(
                       color: Color.fromRGBO(111, 111, 111, 1),
                       fontSize: 18,
@@ -85,47 +86,53 @@ class _AccessState extends State<Access> {
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
                 onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
+                  setState(() {
+                    noAccess = false;
+                  });
                 },
               ),
             ],
           ),
         ),
         const SizedBox(height: 35),
-        TextButton(
-            onPressed: () async {
-              var password = await getPassword();
-              if (password != controllerPassword.text.trim()) {}
-              var name = await getName();
-              var surname = await getSurname();
-              var age = await getAge();
-              var nameDoctor = await getFullNameDoctor();
-              var phoneDoctor = await getPhoneDoctor();
-              var email = await getEmail();
-              cloud.createNewUser(context, password, email,
-                  name: name,
-                  surname: surname,
-                  age: age,
-                  doctorName: nameDoctor,
-                  doctorPhone: phoneDoctor);
-            },
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              )),
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromRGBO(255, 98, 98, 1)),
-              padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
-            ),
-            child: const Text('Далее',
-                style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white))),
+        noAccess
+            ? const Text('Пароли не совпадают')
+            : TextButton(
+                onPressed: () async {
+                  var password = await getPassword();
+                  if (password != controllerPassword.text.trim()) {
+                    setState(() {
+                      noAccess = true;
+                    });
+                  }
+                  var name = await getName();
+                  var surname = await getSurname();
+                  var age = await getAge();
+                  var nameDoctor = await getFullNameDoctor();
+                  var phoneDoctor = await getPhoneDoctor();
+                  var email = await getEmail();
+                  cloud.createNewUser(context, password, email,
+                      name: name,
+                      surname: surname,
+                      age: age,
+                      doctorName: nameDoctor,
+                      doctorPhone: phoneDoctor);
+                },
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  )),
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromRGBO(255, 98, 98, 1)),
+                  padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
+                ),
+                child: const Text('Далее',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white))),
       ])),
     );
   }

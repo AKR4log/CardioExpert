@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -214,6 +216,234 @@ Future<void> shareDrunk(
   await FlutterShare.shareFile(
     title: 'Контроль жидкости',
     text: 'Контроль выпитой и выделенной жидкости',
+    filePath: file.path,
+  );
+}
+
+Future<void> shareReport(
+    {String weight,
+    String height,
+    String upper,
+    String lower,
+    String mno,
+    String pulse,
+    String cholesterol,
+    String ldl,
+    String hdl,
+    String triglycerides,
+    String h0612,
+    String h1218,
+    String h1800,
+    String h0006,
+    String d0612,
+    String d1218,
+    String d1800,
+    String d0006}) async {
+  var pdf = Document();
+  pdf.addPage(Page(
+      pageFormat: PdfPageFormat.a4,
+      build: (context) {
+        return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Weight control. Body mass Index',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          Row(children: [
+                            Text('Weight:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(weight)
+                          ]),
+                          Row(children: [
+                            Text('Height:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(height)
+                          ]),
+                        ]))
+                  ])),
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Blood pressure monitoring',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          Row(children: [
+                            Text('Upper pressure:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(upper)
+                          ]),
+                          Row(children: [
+                            Text('Lower pressure:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(lower)
+                          ]),
+                        ]))
+                  ])),
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Control of INR when taking Warfarin',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          Row(children: [
+                            Text('Passed the INR, enter your indicator:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(mno)
+                          ]),
+                        ]))
+                  ])),
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Pulse monitoring',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          Row(children: [
+                            Text('Your pulse:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(pulse)
+                          ]),
+                        ]))
+                  ])),
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Lipid profile',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          Row(children: [
+                            Text(
+                                'Have passed the tests, enter your "Cholesterol" indicator:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(cholesterol)
+                          ]),
+                          Row(children: [
+                            Text(
+                                'Have passed the tests, enter your LDL indicator:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(ldl)
+                          ]),
+                          Row(children: [
+                            Text(
+                                'Have passed the tests, enter your "HDL" indicator:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(hdl)
+                          ]),
+                          Row(children: [
+                            Text(
+                                'PHave passed the tests, enter your indicator "Triglycerides":',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(triglycerides)
+                          ]),
+                        ]))
+                  ])),
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Control of the drunk and excreted liquid',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          Row(children: [
+                            Text('6:00 - 12:00 Drunk:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(d0612)
+                          ]),
+                          Row(children: [
+                            Text('6:00 - 12:00 Highlighted:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(h0612)
+                          ]),
+                          Row(children: [
+                            Text('12:00 - 18:00 Drunk:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(d1218)
+                          ]),
+                          Row(children: [
+                            Text('12:00 - 18:00 Highlighted:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(h1218)
+                          ]),
+                          Row(children: [
+                            Text('18:00 - 00:00 Drunk:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(d1800)
+                          ]),
+                          Row(children: [
+                            Text('18:00 - 00:00 Highlighted:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(h1800)
+                          ]),
+                          Row(children: [
+                            Text('00:00 - 6:00 Drunk:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(d0006)
+                          ]),
+                          Row(children: [
+                            Text('00:00 - 6:00 Highlighted:',
+                                style: const TextStyle(fontSize: 16)),
+                            SizedBox(width: 15),
+                            Text(h0006)
+                          ]),
+                        ]))
+                  ])),
+        ]);
+      }));
+  pdf.save();
+  final dir = await getExternalStorageDirectory();
+  final String path = "${dir.path}/report.pdf";
+
+  var file = await File(path).writeAsBytes(await pdf.save());
+  await FlutterShare.shareFile(
+    title: 'Все отчёты',
+    text: 'Все последние отчёты',
     filePath: file.path,
   );
 }

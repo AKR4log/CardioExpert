@@ -22,6 +22,7 @@ dependencies:
   uuid: ^3.0.6
   flutter_share: ^2.0.0
   pdf: ^3.8.3
+  intl: 
   flutter_multi_formatter: ^2.5.7
   path_provider: ^2.0.11
   

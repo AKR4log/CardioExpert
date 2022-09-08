@@ -6,6 +6,8 @@ import 'package:cardio_expert/ui/mobile/home/control/mno.dart';
 import 'package:cardio_expert/ui/mobile/home/control/pulse.dart';
 import 'package:cardio_expert/ui/mobile/home/control/weight.dart';
 import 'package:cardio_expert/ui/mobile/home/reports.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -352,6 +354,87 @@ class _HomePageState extends State<HomePage> {
                 ],
               )
             : Column(children: [
+                FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser.uid)
+                      .collection('medications')
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List med = snapshot.data.docs;
+                      return SizedBox(
+                        width: 300,
+                        height: 400,
+                        child: ListView(
+                          children: med
+                              .map(
+                                (e) => Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 18, horizontal: 22),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: const Color.fromRGBO(
+                                          242, 242, 242, 1),
+                                      border: Border.all(
+                                          color: const Color.fromRGBO(
+                                              229, 231, 235, 1))),
+                                  child: Flex(
+                                    direction: Axis.horizontal,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                          child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Приём в ' + e['reception_time'],
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 13,
+                                                color: Color.fromRGBO(
+                                                    148, 148, 148, 1)),
+                                          ),
+                                          Text(
+                                            e['name'],
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                color: Colors.black),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            e['dosage'] + ' мг',
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                color: Color.fromRGBO(
+                                                    255, 98, 98, 1)),
+                                          ),
+                                        ],
+                                      )),
+                                      Flexible(
+                                          child: Image.asset(
+                                              'assets/img/tablet.png'))
+                                    ],
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
+                    } else {
+                      return const SizedBox(
+                          height: 25,
+                          width: 25,
+                          child: Center(child: CircularProgressIndicator()));
+                    }
+                  },
+                ),
                 Container(
                   margin:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 15),

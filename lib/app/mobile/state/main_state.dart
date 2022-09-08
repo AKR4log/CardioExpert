@@ -1,18 +1,30 @@
-import 'package:cardio_expert/app/mobile/state/app_state.dart';
-import 'package:cardio_expert/ui/mobile/connect/connect.dart';
-import 'package:cardio_expert/ui/mobile/home/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+
+import '../../../ui/mobile/connect/connect.dart';
+import '../../../ui/mobile/home/home.dart';
+import '../../../ui/web/home/home.dart';
 import '../../enum.dart';
+import '../../models/board.dart';
+import '../../models/v2board.dart';
+import 'app_state.dart';
 
 class MainStateMobile extends AppStateMobile {
+  final String uidBoard;
+  final String uidV2Board;
+
+  MainStateMobile({this.uidBoard, this.uidV2Board});
+
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   ConfirmationResult confirmationResult;
   User user;
+  final CollectionReference boardCall =
+      FirebaseFirestore.instance.collection('board');
 
   Future<User> getCurrentUser({BuildContext context}) async {
     try {
@@ -22,8 +34,11 @@ class MainStateMobile extends AppStateMobile {
         if (user == null) {
           debugPrint('User is currently signed out!');
           authStatus = AuthStatus.NOT_LOGGED_IN;
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => const ConnectPage()));
+          kIsWeb
+              ? Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePageWeb()))
+              : Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const ConnectPage()));
         } else {
           debugPrint('User is signed in!');
           authStatus = AuthStatus.LOGGED_IN;
@@ -38,5 +53,60 @@ class MainStateMobile extends AppStateMobile {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       return null;
     }
+  }
+
+  // Loading all Board
+  List<Board> loadBoards(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Board(
+        uid: doc.get('uid'),
+        name: doc.get('name'),
+        date: doc.get('date'),
+      );
+    }).toList();
+  }
+
+  Stream<List<Board>> get getAllBoards {
+    return boardCall.snapshots().map(loadBoards);
+  }
+
+  // Loading all V2Board
+  List<V2Board> loadV2Boards(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return V2Board(
+        uid: doc.get('uid'),
+        name: doc.get('name'),
+        date: doc.get('date'),
+        description: doc.get('description'),
+        father: doc.get('father'),
+      );
+    }).toList();
+  }
+
+  Stream<List<V2Board>> get getAllV2Boards {
+    return boardCall
+        .doc(uidBoard)
+        .collection('v2board')
+        .snapshots()
+        .map(loadV2Boards);
+  }
+
+  // Loading an V2Board
+  V2Board getV2Board(DocumentSnapshot snapshot) {
+    return V2Board(
+        uid: snapshot.get('uid'),
+        name: snapshot.get('name'),
+        description: snapshot.get('description'),
+        father: snapshot.get('father'),
+        date: snapshot.get('date'));
+  }
+
+  Stream<V2Board> get getV2Boards {
+    return boardCall
+        .doc(uidBoard)
+        .collection('v2board')
+        .doc(uidV2Board)
+        .snapshots()
+        .map(getV2Board);
   }
 }

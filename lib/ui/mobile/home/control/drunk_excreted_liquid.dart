@@ -457,7 +457,16 @@ class _ControlDrunkState extends State<ControlDrunk> {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
           child: TextButton(
-              onPressed: () {},
+              onPressed: () => cloud.createCntrlDrunk(
+                  context,
+                  controller0612highlighted.text.trim(),
+                  controller1218highlighted.text.trim(),
+                  controller1800highlighted.text.trim(),
+                  controller0006highlighted.text.trim(),
+                  controller0612drunk.text.trim(),
+                  controller1218drunk.text.trim(),
+                  controller1800drunk.text.trim(),
+                  controller0006drunk.text.trim()),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(

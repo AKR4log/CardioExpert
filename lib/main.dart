@@ -9,6 +9,7 @@ import 'app/mobile/state/app_state.dart';
 import 'app/mobile/state/main_state.dart';
 import 'app/routes/routes.dart';
 import 'firebase_options.dart';
+import 'ui/mobile/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,21 +27,22 @@ class MyApp extends StatelessWidget {
     return kIsWeb
         ? MultiProvider(
             providers: [
-                // ChangeNotifierProvider<AppState>(create: (_) => AppState()),
-                // ChangeNotifierProvider<CloudFirestore>(
-                //     create: (_) => CloudFirestore()),
-                // ChangeNotifierProvider<FeedState>(create: (_) => FeedState()),
+                ChangeNotifierProvider<AppStateMobile>(
+                    create: (_) => AppStateMobile()),
+                ChangeNotifierProvider<Cloud>(create: (_) => Cloud()),
+                ChangeNotifierProvider<MainStateMobile>(
+                    create: (_) => MainStateMobile()),
               ],
             child: MaterialApp(
               shortcuts: {
                 LogicalKeySet(LogicalKeyboardKey.space): const ActivateIntent(),
               },
               initialRoute: '/splash',
-              // routes: {
-              //   // '/splash': (context) => const SplashPage(),
-              //   // '/feed': (context) => const Feed(),
-              //   // '/home': (context) => const MainScreen(),
-              // },
+              routes: {
+                '/splash': (context) => const SplashPage(),
+                //   // '/feed': (context) => const Feed(),
+                //   // '/home': (context) => const MainScreen(),
+              },
               debugShowCheckedModeBanner: false,
               title: 'CardioExpert',
             ))

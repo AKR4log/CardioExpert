@@ -61,7 +61,7 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Повторите пароль:',
+              const Text('Придумайте пароль:',
                   style: TextStyle(
                       color: Color.fromRGBO(111, 111, 111, 1),
                       fontSize: 18,
