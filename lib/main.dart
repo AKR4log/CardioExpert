@@ -40,8 +40,6 @@ class MyApp extends StatelessWidget {
               initialRoute: '/splash',
               routes: {
                 '/splash': (context) => const SplashPage(),
-                //   // '/feed': (context) => const Feed(),
-                //   // '/home': (context) => const MainScreen(),
               },
               debugShowCheckedModeBanner: false,
               title: 'CardioExpert',
