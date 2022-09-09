@@ -14,6 +14,7 @@ class ConnectPage extends StatefulWidget {
 class _ConnectPageState extends State<ConnectPage> {
   TextEditingController controllerEmail;
   TextEditingController controllerPassword;
+  String error = '';
 
   @override
   void initState() {
@@ -130,11 +131,27 @@ class _ConnectPageState extends State<ConnectPage> {
             ],
           ),
         ),
-        const SizedBox(height: 35),
+        error != ''
+            ? Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                child: Text(
+                  error,
+                  style: TextStyle(color: Colors.red[400], fontSize: 12),
+                ),
+              )
+            : const SizedBox(),
+        const SizedBox(height: 25),
         TextButton(
             onPressed: () {
-              cloud.signInUser(context, controllerEmail.text.trim(),
-                  controllerPassword.text.trim());
+              cloud
+                  .signInUser(context, controllerEmail.text.trim(),
+                      controllerPassword.text.trim())
+                  .then((value) {
+                setState(() {
+                  error = value.toString();
+                });
+              });
             },
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(

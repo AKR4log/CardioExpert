@@ -16,6 +16,7 @@ class Access extends StatefulWidget {
 class _AccessState extends State<Access> {
   TextEditingController controllerPassword;
   bool noAccess = false;
+  String error = '';
 
   @override
   void initState() {
@@ -94,7 +95,17 @@ class _AccessState extends State<Access> {
             ],
           ),
         ),
-        const SizedBox(height: 35),
+        error != ''
+            ? Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                child: Text(
+                  error,
+                  style: TextStyle(color: Colors.red[400], fontSize: 12),
+                ),
+              )
+            : const SizedBox(),
+        const SizedBox(height: 25),
         noAccess
             ? const Text('Пароли не совпадают')
             : TextButton(
@@ -111,12 +122,18 @@ class _AccessState extends State<Access> {
                   var nameDoctor = await getFullNameDoctor();
                   var phoneDoctor = await getPhoneDoctor();
                   var email = await getEmail();
-                  cloud.createNewUser(context, password, email,
-                      name: name,
-                      surname: surname,
-                      age: age,
-                      doctorName: nameDoctor,
-                      doctorPhone: phoneDoctor);
+                  cloud
+                      .createNewUser(context, password, email,
+                          name: name,
+                          surname: surname,
+                          age: age,
+                          doctorName: nameDoctor,
+                          doctorPhone: phoneDoctor)
+                      .then((value) {
+                    setState(() {
+                      error = value.toString();
+                    });
+                  });
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

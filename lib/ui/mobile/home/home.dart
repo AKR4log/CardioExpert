@@ -351,6 +351,13 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.black)),
                     ),
                   ),
+                  TextButton(
+                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      child: const Text('Выйти из аккаунта',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue))),
                 ],
               )
             : Column(children: [

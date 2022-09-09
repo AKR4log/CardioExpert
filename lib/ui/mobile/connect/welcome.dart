@@ -1,6 +1,8 @@
 import 'package:cardio_expert/ui/mobile/home/home.dart';
 import 'package:flutter/material.dart';
 
+import '../home/helper/home.dart';
+
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key key}) : super(key: key);
 
@@ -84,7 +86,8 @@ class _WelcomePageState extends State<WelcomePage> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => const HelperPage())),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

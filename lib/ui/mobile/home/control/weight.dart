@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
+import '../helper/home.dart';
 
 class ControlWeight extends StatefulWidget {
   const ControlWeight({Key key}) : super(key: key);
@@ -184,7 +185,8 @@ class _ControlWeightState extends State<ControlWeight> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 20),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => const HelperPage())),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

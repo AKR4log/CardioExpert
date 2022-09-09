@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -81,7 +79,7 @@ Future<String> getPassword() async {
 Future<void> sharePulse(String pulse) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
-    return Row(children: [Text('Пульс:'), Text(pulse)]);
+    return Row(children: [Text('Pulse:'), Text(pulse)]);
   }));
   pdf.save();
   final dir = await getExternalStorageDirectory();
@@ -89,8 +87,8 @@ Future<void> sharePulse(String pulse) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Мой пульс',
-    text: 'Мой измеренный пульс',
+    title: 'My pulse',
+    text: 'My measured pulse',
     filePath: file.path,
   );
 }
@@ -99,8 +97,8 @@ Future<void> shareWeight(String weight, String height) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Вес:'), Text(weight)]),
-      Row(children: [Text('Рост:'), Text(height)]),
+      Row(children: [Text('Weight: '), Text(weight)]),
+      Row(children: [Text('Height: '), Text(height)]),
     ]);
   }));
   pdf.save();
@@ -109,8 +107,8 @@ Future<void> shareWeight(String weight, String height) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Мой индекс веса',
-    text: 'Мой измеренный вес и рост',
+    title: 'My weight index',
+    text: 'My measured weight and height',
     filePath: file.path,
   );
 }
@@ -119,8 +117,8 @@ Future<void> shareBlood(String upper, String lower) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Верхнее давление:'), Text(upper)]),
-      Row(children: [Text('Нижнее давление:'), Text(lower)]),
+      Row(children: [Text('Upper pressure: '), Text(upper)]),
+      Row(children: [Text('Lower pressure: '), Text(lower)]),
     ]);
   }));
   pdf.save();
@@ -129,8 +127,8 @@ Future<void> shareBlood(String upper, String lower) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Контроль арт. давление',
-    text: 'Моё измеренное давление',
+    title: 'Control art. pressure',
+    text: 'My measured pressure',
     filePath: file.path,
   );
 }
@@ -139,7 +137,7 @@ Future<void> shareMno(String mno) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Показатели МНО:'), Text(mno)]),
+      Row(children: [Text('INR indicators: '), Text(mno)]),
     ]);
   }));
   pdf.save();
@@ -148,8 +146,8 @@ Future<void> shareMno(String mno) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Показатели МНО',
-    text: 'Моё измеренное МНО',
+    title: 'INR indicators',
+    text: 'My measured by ME',
     filePath: file.path,
   );
 }
@@ -159,10 +157,10 @@ Future<void> shareLipidProfile(
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('«Холестерин»:'), Text(cholesterol)]),
-      Row(children: [Text('«ЛПНП»:'), Text(ldl)]),
-      Row(children: [Text('«ЛПВП»:'), Text(hdl)]),
-      Row(children: [Text('«Триглицериды»:'), Text(triglycerides)]),
+      Row(children: [Text('"Cholesterol": '), Text(cholesterol)]),
+      Row(children: [Text('"LDL": '), Text(ldl)]),
+      Row(children: [Text('"HDL": '), Text(hdl)]),
+      Row(children: [Text('"Triglycerides": '), Text(triglycerides)]),
     ]);
   }));
   pdf.save();
@@ -171,8 +169,8 @@ Future<void> shareLipidProfile(
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Липидный профиль',
-    text: 'Моё измеренное липидного профиля',
+    title: 'Lipid profile',
+    text: 'My measured lipid profile',
     filePath: file.path,
   );
 }
@@ -189,21 +187,24 @@ Future<void> shareDrunk(
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Выпито с 06:00 по 12:00:'), Text(num0612drunk)]),
+      Row(children: [Text('Drunk from 06:00 to 12:00: '), Text(num0612drunk)]),
       Row(children: [
-        Text('Выделено с 06:00 по 12:00:'),
+        Text('Allocated from 06:00 to 12:00: '),
         Text(num0612highlighted)
       ]),
-      Row(children: [Text('Выпито с 12:00 по 18:00:'), Text(num1218drunk)]),
-      Row(children: [Text('Выделено с 12:00 по 18:00:'), Text(num1218drunk)]),
-      Row(children: [Text('Выпито с 18:00 по 00:00:'), Text(num1800drunk)]),
+      Row(children: [Text('Drunk from 12:00 to 18:00: '), Text(num1218drunk)]),
       Row(children: [
-        Text('Выделено с 18:00 по 00:00:'),
+        Text('Allocated from 12:00 to 18:00: '),
+        Text(num1218drunk)
+      ]),
+      Row(children: [Text('Drunk from 18:00 to 00:00: '), Text(num1800drunk)]),
+      Row(children: [
+        Text('Allocated from 18:00 to 00:00: '),
         Text(num1800highlighted)
       ]),
-      Row(children: [Text('Выпито с 00:00 по 06:00:'), Text(num0006drunk)]),
+      Row(children: [Text('Drunk from 00:00 to 06:00: '), Text(num0006drunk)]),
       Row(children: [
-        Text('Выделено с 00:00 по 06:00:'),
+        Text('Allocated from 00:00 to 06:00: '),
         Text(num0006highlighted)
       ]),
     ]);
@@ -214,8 +215,8 @@ Future<void> shareDrunk(
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Контроль жидкости',
-    text: 'Контроль выпитой и выделенной жидкости',
+    title: 'Fluid control',
+    text: 'Control of the drunk and excreted liquid',
     filePath: file.path,
   );
 }
@@ -257,15 +258,15 @@ Future<void> shareReport(
                         child: Column(children: [
                           Row(children: [
                             Text('Weight:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(weight)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(weight, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('Height:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(height)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(height, style: const TextStyle(fontSize: 15)),
                           ]),
                         ]))
                   ])),
@@ -282,15 +283,15 @@ Future<void> shareReport(
                         child: Column(children: [
                           Row(children: [
                             Text('Upper pressure:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(upper)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(upper, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('Lower pressure:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(lower)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(lower, style: const TextStyle(fontSize: 15)),
                           ]),
                         ]))
                   ])),
@@ -307,9 +308,9 @@ Future<void> shareReport(
                         child: Column(children: [
                           Row(children: [
                             Text('Passed the INR, enter your indicator:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(mno)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(mno, style: const TextStyle(fontSize: 15)),
                           ]),
                         ]))
                   ])),
@@ -326,9 +327,9 @@ Future<void> shareReport(
                         child: Column(children: [
                           Row(children: [
                             Text('Your pulse:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(pulse)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(pulse, style: const TextStyle(fontSize: 15)),
                           ]),
                         ]))
                   ])),
@@ -346,30 +347,32 @@ Future<void> shareReport(
                           Row(children: [
                             Text(
                                 'Have passed the tests, enter your "Cholesterol" indicator:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(cholesterol)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(cholesterol,
+                                style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text(
                                 'Have passed the tests, enter your LDL indicator:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(ldl)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(ldl, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text(
                                 'Have passed the tests, enter your "HDL" indicator:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(hdl)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(hdl, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text(
                                 'PHave passed the tests, enter your indicator "Triglycerides":',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(triglycerides)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(triglycerides,
+                                style: const TextStyle(fontSize: 15)),
                           ]),
                         ]))
                   ])),
@@ -386,51 +389,51 @@ Future<void> shareReport(
                         child: Column(children: [
                           Row(children: [
                             Text('6:00 - 12:00 Drunk:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(d0612)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(d0612, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('6:00 - 12:00 Highlighted:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(h0612)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(h0612, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('12:00 - 18:00 Drunk:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(d1218)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(d1218, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('12:00 - 18:00 Highlighted:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(h1218)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(h1218, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('18:00 - 00:00 Drunk:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(d1800)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(d1800, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('18:00 - 00:00 Highlighted:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(h1800)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(h1800, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('00:00 - 6:00 Drunk:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(d0006)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(d0006, style: const TextStyle(fontSize: 15)),
                           ]),
                           Row(children: [
                             Text('00:00 - 6:00 Highlighted:',
-                                style: const TextStyle(fontSize: 16)),
-                            SizedBox(width: 15),
-                            Text(h0006)
+                                style: const TextStyle(fontSize: 15)),
+                            SizedBox(width: 10),
+                            Text(h0006, style: const TextStyle(fontSize: 15)),
                           ]),
                         ]))
                   ])),
@@ -442,8 +445,8 @@ Future<void> shareReport(
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Все отчёты',
-    text: 'Все последние отчёты',
+    title: 'All reports',
+    text: 'All recent reports',
     filePath: file.path,
   );
 }

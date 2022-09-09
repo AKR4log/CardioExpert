@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
+import '../helper/home.dart';
 
 class ControlMno extends StatefulWidget {
   const ControlMno({Key key}) : super(key: key);
@@ -125,7 +126,8 @@ class _ControlMnoState extends State<ControlMno> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => const HelperPage())),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

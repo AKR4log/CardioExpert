@@ -20,7 +20,7 @@ class Cloud extends AppStateMobile {
   CollectionReference refU = FirebaseFirestore.instance.collection("users");
   CollectionReference refB = FirebaseFirestore.instance.collection("board");
 
-  Future<void> createNewUser(
+  Future<String> createNewUser(
       BuildContext context, String password, String email,
       {String name,
       String surname,
@@ -44,27 +44,29 @@ class Cloud extends AppStateMobile {
           builder: (BuildContext context) => const WelcomePage())));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        return 'Предоставленный пароль слишком слаб.';
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        return 'Учетная запись для этого электронного письма уже существует.';
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> signInUser(
+  Future<String> signInUser(
       BuildContext context, String email, String password) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password)
-          .whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage())));
+          .signInWithEmailAndPassword(email: email, password: password);
+      if (userCredential.user.uid != '') {
+        return Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => const HomePage()));
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        return 'Пользователь для этого письма не найден.';
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        return 'Неверный пароль, указанный для этого пользователя.';
       }
     }
   }
