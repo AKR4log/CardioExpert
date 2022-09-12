@@ -1,24 +1,22 @@
 // ignore_for_file: missing_return
 
-import 'package:cardio_expert/app/models/v2board.dart';
+import 'package:cardio_expert/app/models/hint.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../app/database/firebase.dart';
 import '../../../../../app/mobile/state/main_state.dart';
-import '../../home.dart';
+import '../../home/home.dart';
 
-class DetailV2Board extends StatefulWidget {
-  final String v2boardUid;
-  final String boardUid;
-  const DetailV2Board({Key key, this.v2boardUid, this.boardUid})
-      : super(key: key);
+class DetailHint extends StatefulWidget {
+  final String hintUid;
+  const DetailHint({Key key, this.hintUid}) : super(key: key);
 
   @override
-  State<DetailV2Board> createState() => _DetailV2BoardState();
+  State<DetailHint> createState() => _DetailHintState();
 }
 
-class _DetailV2BoardState extends State<DetailV2Board> {
+class _DetailHintState extends State<DetailHint> {
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerDescription = TextEditingController();
 
@@ -72,7 +70,7 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                               child: SizedBox(
                                 width: 200,
                                 child: Text(
-                                  widget.v2boardUid.toString(),
+                                  widget.hintUid.toString(),
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
                                       fontSize: 20,
@@ -217,10 +215,9 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                                   child: const Text('Готово'),
                                                   onPressed: () {
                                                     cloud
-                                                        .updateV2Board(
+                                                        .updateHint(
                                                             context,
-                                                            widget.boardUid,
-                                                            widget.v2boardUid,
+                                                            widget.hintUid,
                                                             controllerName.text
                                                                 .trim(),
                                                             controllerDescription
@@ -244,49 +241,46 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                       ),
                     )),
                     Flexible(
-                      flex: 6,
-                      child: SizedBox(
-                        width: 600,
-                        height: 300,
-                        child: StreamBuilder<V2Board>(
-                            stream: MainStateMobile(
-                                    uidV2Board: widget.v2boardUid,
-                                    uidBoard: widget.boardUid)
-                                .getV2Boards,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                V2Board board = snapshot.data;
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Название: ${board.name}",
-                                        style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "Описание: ${board.description}",
-                                        style: const TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    ],
-                                  ),
+                        flex: 6,
+                        child: SizedBox(
+                          width: 600,
+                          height: 300,
+                          child: StreamBuilder<Hint>(
+                              stream: MainStateMobile(uidHint: widget.hintUid)
+                                  .getHints,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  Hint hint = snapshot.data;
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 20),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Название: ${hint.name}",
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          "Описание: ${hint.description}",
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }
+                                return const SizedBox(
+                                  height: 40,
+                                  width: 40,
+                                  child: CircularProgressIndicator(),
                                 );
-                              }
-                              return const SizedBox(
-                                height: 40,
-                                width: 40,
-                                child: CircularProgressIndicator(),
-                              );
-                            }),
-                      ),
-                    ),
+                              }),
+                        )),
                     Flexible(
                         child: Container(
                       decoration: BoxDecoration(

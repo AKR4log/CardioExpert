@@ -19,6 +19,7 @@ class Cloud extends AppStateMobile {
   User user;
   CollectionReference refU = FirebaseFirestore.instance.collection("users");
   CollectionReference refB = FirebaseFirestore.instance.collection("board");
+  CollectionReference refH = FirebaseFirestore.instance.collection("hint");
 
   Future<String> createNewUser(
       BuildContext context, String password, String email,
@@ -352,6 +353,41 @@ class Cloud extends AppStateMobile {
         'uid': uid,
         'date': DateTime.now().toString()
       });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<String> updateV2Board(BuildContext context, String fatherUid,
+      String uid, String name, String description) async {
+    await Firebase.initializeApp();
+    try {
+      refB
+          .doc(fatherUid)
+          .collection('v2board')
+          .doc(uid)
+          .update({'name': name, 'description': description});
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<String> createHint(
+      BuildContext context, String name, String description) async {
+    await Firebase.initializeApp();
+    try {
+      var uid = const Uuid().v4();
+      refH.doc(uid).set({'name': name, 'description': description, 'uid': uid});
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<String> updateHint(
+      BuildContext context, String uid, String name, String description) async {
+    await Firebase.initializeApp();
+    try {
+      refH.doc(uid).update({'name': name, 'description': description});
     } catch (e) {
       debugPrint(e.toString());
     }

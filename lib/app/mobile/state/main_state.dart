@@ -1,3 +1,5 @@
+import 'package:cardio_expert/app/models/hint.dart';
+import 'package:cardio_expert/app/models/v2hint.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,8 +18,11 @@ import 'app_state.dart';
 class MainStateMobile extends AppStateMobile {
   final String uidBoard;
   final String uidV2Board;
+  final String uidHint;
+  final String uidV2Hint;
 
-  MainStateMobile({this.uidBoard, this.uidV2Board});
+  MainStateMobile(
+      {this.uidBoard, this.uidV2Board, this.uidHint, this.uidV2Hint});
 
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -25,6 +30,8 @@ class MainStateMobile extends AppStateMobile {
   User user;
   final CollectionReference boardCall =
       FirebaseFirestore.instance.collection('board');
+  final CollectionReference hintCall =
+      FirebaseFirestore.instance.collection('hint');
 
   Future<User> getCurrentUser({BuildContext context}) async {
     try {
@@ -108,5 +115,30 @@ class MainStateMobile extends AppStateMobile {
         .doc(uidV2Board)
         .snapshots()
         .map(getV2Board);
+  }
+
+  // Loading all Hint
+  List<Hint> loadHints(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Hint(
+          uid: doc.get('uid'),
+          name: doc.get('name'),
+          description: doc.get('description'));
+    }).toList();
+  }
+
+  Stream<List<Hint>> get getAllHints {
+    return hintCall.snapshots().map(loadHints);
+  }
+
+  Hint getHint(DocumentSnapshot snapshot) {
+    return Hint(
+        uid: snapshot.get('uid'),
+        name: snapshot.get('name'),
+        description: snapshot.get('description'));
+  }
+
+  Stream<Hint> get getHints {
+    return hintCall.doc(uidHint).snapshots().map(getHint);
   }
 }

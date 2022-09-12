@@ -1,25 +1,27 @@
-import 'package:cardio_expert/app/mobile/state/main_state.dart';
-import 'package:cardio_expert/app/models/board.dart';
-import 'package:cardio_expert/ui/web/hint/home.dart';
+import 'package:cardio_expert/app/models/hint.dart';
+import 'package:cardio_expert/ui/web/hint/common/list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/database/firebase.dart';
-import 'common/list_board.dart';
+import '../../../app/mobile/state/main_state.dart';
+import '../home/home.dart';
 
-class HomePageWeb extends StatefulWidget {
-  const HomePageWeb({Key key}) : super(key: key);
+class HintPage extends StatefulWidget {
+  const HintPage({Key key}) : super(key: key);
 
   @override
-  State<HomePageWeb> createState() => _HomePageWebState();
+  State<HintPage> createState() => _HintPageState();
 }
 
-class _HomePageWebState extends State<HomePageWeb> {
-  TextEditingController controllerNameBoard = TextEditingController();
+class _HintPageState extends State<HintPage> {
+  TextEditingController controllerName = TextEditingController();
+  TextEditingController controllerDescription = TextEditingController();
 
   @override
   void initState() {
-    controllerNameBoard = TextEditingController();
+    controllerDescription = TextEditingController();
+    controllerName = TextEditingController();
     super.initState();
   }
 
@@ -45,7 +47,7 @@ class _HomePageWebState extends State<HomePageWeb> {
                 Flexible(
                     child: Container(
                   width: 600,
-                  height: double.infinity,
+                  height: 400,
                   decoration: BoxDecoration(
                       borderRadius:
                           const BorderRadius.vertical(top: Radius.circular(15)),
@@ -61,7 +63,7 @@ class _HomePageWebState extends State<HomePageWeb> {
                       const Flexible(
                           flex: 4,
                           child: Text(
-                            'CardioExpert',
+                            'CardioExpert подсказки',
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           )),
@@ -74,9 +76,9 @@ class _HomePageWebState extends State<HomePageWeb> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                const HintPage()));
+                                                const HomePageWeb()));
                                   },
-                                  child: const Text('Посказки')),
+                                  child: const Text('На главную')),
                               TextButton(
                                   onPressed: () {
                                     showDialog(
@@ -84,7 +86,8 @@ class _HomePageWebState extends State<HomePageWeb> {
                                       barrierDismissible: false,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: const Text('Создание доски'),
+                                          title:
+                                              const Text('Создание v2 доски'),
                                           content: SingleChildScrollView(
                                             child: ListBody(
                                               children: <Widget>[
@@ -100,8 +103,7 @@ class _HomePageWebState extends State<HomePageWeb> {
                                                       )),
                                                 ),
                                                 TextField(
-                                                  controller:
-                                                      controllerNameBoard,
+                                                  controller: controllerName,
                                                   style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -114,7 +116,50 @@ class _HomePageWebState extends State<HomePageWeb> {
                                                             vertical: 10,
                                                             horizontal: 15),
                                                     hintText:
-                                                        'Липидный Профиль',
+                                                        'Зачем нужен Липидный Профиль?',
+                                                    hintStyle: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                    border: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    229,
+                                                                    231,
+                                                                    235,
+                                                                    1))),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 4),
+                                                  child: const Text(
+                                                      'Введите описание доски:',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 13,
+                                                      )),
+                                                ),
+                                                TextField(
+                                                  controller:
+                                                      controllerDescription,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 15,
+                                                      color: Colors.black),
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    contentPadding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10,
+                                                            horizontal: 15),
+                                                    hintText:
+                                                        'Липидный Профиль позволяет...',
                                                     hintStyle: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w400,
@@ -148,9 +193,12 @@ class _HomePageWebState extends State<HomePageWeb> {
                                               child: const Text('Создать'),
                                               onPressed: () {
                                                 cloud
-                                                    .createBoard(
+                                                    .createHint(
                                                         context,
-                                                        controllerNameBoard.text
+                                                        controllerName.text
+                                                            .trim(),
+                                                        controllerDescription
+                                                            .text
                                                             .trim())
                                                     .whenComplete(() {
                                                   Navigator.of(context).pop();
@@ -162,7 +210,7 @@ class _HomePageWebState extends State<HomePageWeb> {
                                       },
                                     );
                                   },
-                                  child: const Text('Создать доску')),
+                                  child: const Text('Создать подсказку')),
                             ],
                           ))
                     ],
@@ -170,10 +218,10 @@ class _HomePageWebState extends State<HomePageWeb> {
                 )),
                 Flexible(
                   flex: 6,
-                  child: StreamProvider<List<Board>>.value(
-                    value: MainStateMobile().getAllBoards,
+                  child: StreamProvider<List<Hint>>.value(
+                    value: MainStateMobile().getAllHints,
                     initialData: const [],
-                    child: const ListBoard(),
+                    child: const ListHint(),
                   ),
                 ),
                 Flexible(
@@ -189,11 +237,5 @@ class _HomePageWebState extends State<HomePageWeb> {
             ),
           ),
         )));
-  }
-
-  @override
-  void dispose() {
-    controllerNameBoard?.dispose();
-    super.dispose();
   }
 }
