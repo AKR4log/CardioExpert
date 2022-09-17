@@ -14,19 +14,42 @@ class PreviewBoard extends StatefulWidget {
 class _PreviewBoardState extends State<PreviewBoard> {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) =>
-                HomeV2(uidBoard: widget.board.uid, name: widget.board.name)));
-      },
-      child: Container(
-        width: 600,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Text(
-          widget.board.name,
-          style: const TextStyle(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+    return Container(
+      margin: const EdgeInsets.all(5),
+      child: TextButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  HomeV2(uidBoard: widget.board.uid, name: widget.board.name)));
+        },
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: Colors.grey[100]))),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          padding: MaterialStateProperty.all(const EdgeInsets.all(25)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Доска',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              widget.board.name,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400),
+            ),
+          ],
         ),
       ),
     );

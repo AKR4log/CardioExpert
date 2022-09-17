@@ -21,14 +21,14 @@ class _ListV2BoardState extends State<ListV2Board> {
               strokeWidth: 3,
             ),
           )
-        : ListView.builder(
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            primary: true,
-            itemCount: board.length,
-            itemBuilder: (context, index) {
-              return PreviewV2Board(v2board: board[index]);
-            },
+        : Wrap(
+            direction: Axis.horizontal,
+            spacing: 4.0,
+            children: [
+              ...board.map((e) => PreviewV2Board(
+                    v2board: e,
+                  ))
+            ],
           );
   }
 }

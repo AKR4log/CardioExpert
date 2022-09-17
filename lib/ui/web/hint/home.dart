@@ -34,207 +34,156 @@ class _HintPageState extends State<HintPage> {
             child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Center(
-            child: Container(
-              width: 600,
-              height: 400,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  border: Border.all(
-                      color: const Color.fromRGBO(242, 242, 242, 1))),
-              child: Flex(direction: Axis.vertical, children: [
-                Flexible(
-                    child: Container(
-                  width: 600,
-                  height: 400,
-                  decoration: BoxDecoration(
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(15)),
-                      color: Colors.white,
-                      border: Border.all(
-                          color: const Color.fromRGBO(242, 242, 242, 1))),
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Flex(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    direction: Axis.horizontal,
-                    children: [
-                      const Flexible(
-                          flex: 4,
-                          child: Text(
-                            'CardioExpert подсказки',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          )),
-                      Flexible(
-                          flex: 3,
-                          child: Row(
-                            children: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                const HomePageWeb()));
-                                  },
-                                  child: const Text('На главную')),
-                              TextButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title:
-                                              const Text('Создание v2 доски'),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
-                                              children: <Widget>[
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 4),
-                                                  child: const Text(
-                                                      'Введите название доски:',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 13,
-                                                      )),
-                                                ),
-                                                TextField(
-                                                  controller: controllerName,
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 15,
-                                                      color: Colors.black),
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 10,
-                                                            horizontal: 15),
-                                                    hintText:
-                                                        'Зачем нужен Липидный Профиль?',
-                                                    hintStyle: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
-                                                    border: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    229,
-                                                                    231,
-                                                                    235,
-                                                                    1))),
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 15),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 4),
-                                                  child: const Text(
-                                                      'Введите описание доски:',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 13,
-                                                      )),
-                                                ),
-                                                TextField(
-                                                  controller:
-                                                      controllerDescription,
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 15,
-                                                      color: Colors.black),
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 10,
-                                                            horizontal: 15),
-                                                    hintText:
-                                                        'Липидный Профиль позволяет...',
-                                                    hintStyle: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
-                                                    border: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    229,
-                                                                    231,
-                                                                    235,
-                                                                    1))),
-                                                  ),
-                                                ),
-                                              ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 200, vertical: 75),
+            child: Flex(direction: Axis.vertical, children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: const Text("CardioExpert подсказки",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 38, fontWeight: FontWeight.bold)),
+                    ),
+                    Row(
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const HomePageWeb()));
+                            },
+                            child: const Text('На главную')),
+                        TextButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Создание v2 доски'),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: <Widget>[
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 4),
+                                            child: const Text(
+                                                'Введите название доски:',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 13,
+                                                )),
+                                          ),
+                                          TextField(
+                                            controller: controllerName,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15,
+                                                color: Colors.black),
+                                            decoration: const InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 15),
+                                              hintText:
+                                                  'Зачем нужен Липидный Профиль?',
+                                              hintStyle: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                  color: Colors.black54),
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Color.fromRGBO(
+                                                          229, 231, 235, 1))),
                                             ),
                                           ),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text(
-                                                'Отменить',
+                                          const SizedBox(height: 15),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 4),
+                                            child: const Text(
+                                                'Введите описание доски:',
                                                 style: TextStyle(
-                                                    color: Colors.red[400]),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 13,
+                                                )),
+                                          ),
+                                          TextField(
+                                            controller: controllerDescription,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15,
+                                                color: Colors.black),
+                                            decoration: const InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 15),
+                                              hintText:
+                                                  'Липидный Профиль позволяет...',
+                                              hintStyle: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                  color: Colors.black54),
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Color.fromRGBO(
+                                                          229, 231, 235, 1))),
                                             ),
-                                            TextButton(
-                                              child: const Text('Создать'),
-                                              onPressed: () {
-                                                cloud
-                                                    .createHint(
-                                                        context,
-                                                        controllerName.text
-                                                            .trim(),
-                                                        controllerDescription
-                                                            .text
-                                                            .trim())
-                                                    .whenComplete(() {
-                                                  Navigator.of(context).pop();
-                                                });
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: const Text('Создать подсказку')),
-                            ],
-                          ))
-                    ],
-                  ),
-                )),
-                Flexible(
-                  flex: 6,
-                  child: StreamProvider<List<Hint>>.value(
-                    value: MainStateMobile().getAllHints,
-                    initialData: const [],
-                    child: const ListHint(),
-                  ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text(
+                                          'Отменить',
+                                          style:
+                                              TextStyle(color: Colors.red[400]),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: const Text('Создать'),
+                                        onPressed: () {
+                                          cloud
+                                              .createHint(
+                                                  context,
+                                                  controllerName.text.trim(),
+                                                  controllerDescription.text
+                                                      .trim())
+                                              .whenComplete(() {
+                                            Navigator.of(context).pop();
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: const Text('Создать подсказку')),
+                      ],
+                    ),
+                  ],
                 ),
-                Flexible(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                          bottom: Radius.circular(15)),
-                      color: Colors.white,
-                      border: Border.all(
-                          color: const Color.fromRGBO(242, 242, 242, 1))),
-                )),
-              ]),
-            ),
+              ),
+              Flexible(
+                flex: 6,
+                child: StreamProvider<List<Hint>>.value(
+                  value: MainStateMobile().getAllHints,
+                  initialData: const [],
+                  child: const ListHint(),
+                ),
+              ),
+            ]),
           ),
         )));
   }

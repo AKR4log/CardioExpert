@@ -20,14 +20,14 @@ class _ListHintState extends State<ListHint> {
               strokeWidth: 3,
             ),
           )
-        : ListView.builder(
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            primary: true,
-            itemCount: hint.length,
-            itemBuilder: (context, index) {
-              return PreviewHint(hint: hint[index]);
-            },
+        : Wrap(
+            direction: Axis.horizontal,
+            spacing: 4.0,
+            children: [
+              ...hint.map((e) => PreviewHint(
+                    hint: e,
+                  ))
+            ],
           );
   }
 }

@@ -20,14 +20,14 @@ class _ListBoardState extends State<ListBoard> {
               strokeWidth: 3,
             ),
           )
-        : ListView.builder(
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            primary: true,
-            itemCount: board.length,
-            itemBuilder: (context, index) {
-              return PreviewBoard(board: board[index]);
-            },
+        : Wrap(
+            direction: Axis.horizontal,
+            spacing: 4.0,
+            children: [
+              ...board.map((e) => PreviewBoard(
+                    board: e,
+                  ))
+            ],
           );
   }
 }
