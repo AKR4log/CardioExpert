@@ -366,8 +366,8 @@ class Cloud extends AppStateMobile {
           .doc(uid)
           .set({
         'reception_time_1': reception_time1,
-        'reception_time_2': reception_time2 ?? null,
-        'reception_time_3': reception_time3 ?? null,
+        'reception_time_2': reception_time2 != '' ? reception_time2 : null,
+        'reception_time_3': reception_time3 != '' ? reception_time3 : null,
         'period': period,
         'name': name,
         'uid': uid,

@@ -25,6 +25,7 @@ dependencies:
   intl: 
   flutter_multi_formatter: ^2.5.7
   path_provider: ^2.0.11
+  flutter_local_notifications: ^9.6.1
   
   # cached_network_image: ^3.2.1
   # flutter_cache_manager: ^3.3.0

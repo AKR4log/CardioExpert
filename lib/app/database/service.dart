@@ -7,6 +7,16 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+Future<bool> setTimeMed(List<String> list) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  return await prefs.setStringList('time', list);
+}
+
+Future<List<String>> getTimeMed() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getStringList('time');
+}
+
 Future<bool> setName(String value) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.setString('Name', value);
