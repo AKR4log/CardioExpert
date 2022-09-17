@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 import '../enum.dart';
@@ -76,6 +77,9 @@ class Cloud extends AppStateMobile {
       BuildContext context, String weight, String height) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
       refU
           .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('control_weight')
@@ -83,7 +87,7 @@ class Cloud extends AppStateMobile {
           .set({
         'weight': weight,
         'height': height,
-        'date': DateTime.now().toString()
+        'date': formatted
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -99,7 +103,6 @@ class Cloud extends AppStateMobile {
         upperB = 'none',
         lowerB = 'none',
         pulse = 'none',
-        dateP = 'none',
         mno = 'none',
         cholesterolL = 'none',
         ldlL = 'none',
@@ -112,7 +115,13 @@ class Cloud extends AppStateMobile {
         n0612drunk = 'none',
         n1218drunk = 'none',
         n1800drunk = 'none',
-        n0006drunk = 'none';
+        n0006drunk = 'none',
+        dateW = 'none',
+        dateP = 'none',
+        dateM = 'none',
+        dateL = 'none',
+        dateB = 'none',
+        dateD = 'none';
 
     try {
       refU
@@ -123,6 +132,7 @@ class Cloud extends AppStateMobile {
         if (value.docs.isNotEmpty) {
           weightW = value.docs.last.get('weight');
           heightW = value.docs.last.get('height');
+          dateW = value.docs.last.get('date');
         }
         refU
             .doc(FirebaseAuth.instance.currentUser.uid)
@@ -132,6 +142,7 @@ class Cloud extends AppStateMobile {
           if (value.docs.isNotEmpty) {
             upperB = value.docs.last.get('upper');
             lowerB = value.docs.last.get('lower');
+            dateB = value.docs.last.get('date');
           }
           refU
               .doc(FirebaseAuth.instance.currentUser.uid)
@@ -140,6 +151,7 @@ class Cloud extends AppStateMobile {
               .then((value) {
             if (value.docs.isNotEmpty) {
               pulse = value.docs.last.get('pulse');
+              dateP = value.docs.last.get('date');
             }
             refU
                 .doc(FirebaseAuth.instance.currentUser.uid)
@@ -148,6 +160,7 @@ class Cloud extends AppStateMobile {
                 .then((value) {
               if (value.docs.isNotEmpty) {
                 mno = value.docs.last.get('mno');
+                dateM = value.docs.last.get('date');
               }
               refU
                   .doc(FirebaseAuth.instance.currentUser.uid)
@@ -159,6 +172,7 @@ class Cloud extends AppStateMobile {
                   ldlL = value.docs.last.get('ldl');
                   hdlL = value.docs.last.get('hdl');
                   triglyceridesL = value.docs.last.get('triglycerides');
+                  dateL = value.docs.last.get('date');
                 }
                 refU
                     .doc(FirebaseAuth.instance.currentUser.uid)
@@ -174,6 +188,7 @@ class Cloud extends AppStateMobile {
                     n1218drunk = value.docs.last.get('n1218drunk');
                     n1800drunk = value.docs.last.get('n1800drunk');
                     n0006drunk = value.docs.last.get('n0006drunk');
+                    dateD = value.docs.last.get('date');
                   }
 
                   return shareReport(
@@ -194,7 +209,13 @@ class Cloud extends AppStateMobile {
                       d1218: n1218drunk,
                       h1218: n1218highlighted,
                       d1800: n1800drunk,
-                      h1800: n1800highlighted);
+                      h1800: n1800highlighted,
+                      dateB: dateB,
+                      dateD: dateD,
+                      dateL: dateL,
+                      dateM: dateM,
+                      dateP: dateP,
+                      dateW: dateW);
                 });
               });
             });
@@ -210,6 +231,9 @@ class Cloud extends AppStateMobile {
       BuildContext context, String upper, String lower) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
       refU
           .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('control_blood')
@@ -217,7 +241,7 @@ class Cloud extends AppStateMobile {
           .set({
         'upper': upper,
         'lower': lower,
-        'date': DateTime.now()
+        'date': formatted
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -228,11 +252,15 @@ class Cloud extends AppStateMobile {
   Future<void> createCntrlPulse(BuildContext context, String pulse) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
+
       refU
           .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('control_pulse')
           .doc(const Uuid().v4())
-          .set({'pulse': pulse, 'date': DateTime.now()}).whenComplete(() =>
+          .set({'pulse': pulse, 'date': formatted}).whenComplete(() =>
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -243,11 +271,14 @@ class Cloud extends AppStateMobile {
   Future<void> createCntrlMno(BuildContext context, String mno) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
       refU
           .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('control_mno')
           .doc(const Uuid().v4())
-          .set({'mno': mno, 'date': DateTime.now()}).whenComplete(() =>
+          .set({'mno': mno, 'date': formatted}).whenComplete(() =>
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -259,6 +290,9 @@ class Cloud extends AppStateMobile {
       String ldl, String hdl, String triglycerides) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
       refU
           .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('lipid_profile')
@@ -268,7 +302,7 @@ class Cloud extends AppStateMobile {
         'ldl': ldl,
         'hdl': hdl,
         'triglycerides': triglycerides,
-        'date': DateTime.now()
+        'date': formatted
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -288,6 +322,9 @@ class Cloud extends AppStateMobile {
       String n0006drunk) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
       refU
           .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('drunk')
@@ -301,7 +338,7 @@ class Cloud extends AppStateMobile {
         'n1218drunk': n1218drunk,
         'n1800drunk': n1800drunk,
         'n0006drunk': n0006drunk,
-        'date': DateTime.now()
+        'date': formatted
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -309,19 +346,33 @@ class Cloud extends AppStateMobile {
     }
   }
 
-  Future<void> createMedication(BuildContext context, String reception_time,
-      String name, String dosage) async {
+  Future<void> createMedication(
+      BuildContext context,
+      String reception_time1,
+      String reception_time2,
+      String reception_time3,
+      String name,
+      String dosage,
+      String period) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
+      var uid = const Uuid().v4();
       refU
           .doc(FirebaseAuth.instance.currentUser.uid)
           .collection('medications')
-          .doc(const Uuid().v4())
+          .doc(uid)
           .set({
-        'reception_time': reception_time,
+        'reception_time_1': reception_time1,
+        'reception_time_2': reception_time2 ?? null,
+        'reception_time_3': reception_time3 ?? null,
+        'period': period,
         'name': name,
+        'uid': uid,
         'dosage': dosage,
-        'date': DateTime.now()
+        'date': formatted
       }).whenComplete(() => Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const HomePage())));
     } catch (e) {
@@ -332,10 +383,11 @@ class Cloud extends AppStateMobile {
   Future<String> createBoard(BuildContext context, String name) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
       var uid = const Uuid().v4();
-      refB
-          .doc(uid)
-          .set({'name': name, 'uid': uid, 'date': DateTime.now().toString()});
+      refB.doc(uid).set({'name': name, 'uid': uid, 'date': formatted});
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -345,13 +397,16 @@ class Cloud extends AppStateMobile {
       String name, String description) async {
     await Firebase.initializeApp();
     try {
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
       var uid = const Uuid().v4();
       refB.doc(fatherUid).collection('v2board').doc(uid).set({
         'name': name,
         'description': description,
         'father': fatherUid,
         'uid': uid,
-        'date': DateTime.now().toString()
+        'date': formatted
       });
     } catch (e) {
       debugPrint(e.toString());

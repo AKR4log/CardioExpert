@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
 import '../../../../app/database/service.dart';
+import '../action/helper.dart';
 import '../helper/home.dart';
 
 class ControlDrunk extends StatefulWidget {
@@ -88,7 +90,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -126,7 +128,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -182,7 +184,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -220,7 +222,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -276,7 +278,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -314,7 +316,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -370,7 +372,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -408,7 +410,7 @@ class _ControlDrunkState extends State<ControlDrunk> {
                             color: Colors.black),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          hintText: '123',
+                          hintText: '0',
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 30,
@@ -436,7 +438,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 27),
           child: TextButton(
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const HelperPage())),
+                  builder: (BuildContext context) => const HelperPageMobile(
+                        uid: "ebe4b277-688c-4407-84c1-0cf1b6fdb222",
+                      ))),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -489,15 +493,21 @@ class _ControlDrunkState extends State<ControlDrunk> {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
           child: TextButton(
-              onPressed: () => shareDrunk(
-                  controller0612highlighted.text.trim(),
-                  controller1218highlighted.text.trim(),
-                  controller1800highlighted.text.trim(),
-                  controller0006highlighted.text.trim(),
-                  controller0612drunk.text.trim(),
-                  controller1218drunk.text.trim(),
-                  controller1800drunk.text.trim(),
-                  controller0006drunk.text.trim()),
+              onPressed: () {
+                final DateTime now = DateTime.now();
+                final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                final String formatted = formatter.format(now);
+                shareDrunk(
+                    controller0612highlighted.text.trim(),
+                    controller1218highlighted.text.trim(),
+                    controller1800highlighted.text.trim(),
+                    controller0006highlighted.text.trim(),
+                    controller0612drunk.text.trim(),
+                    controller1218drunk.text.trim(),
+                    controller1800drunk.text.trim(),
+                    controller0006drunk.text.trim(),
+                    formatted);
+              },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(

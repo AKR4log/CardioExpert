@@ -1,8 +1,10 @@
 import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
+import '../action/helper.dart';
 import '../helper/home.dart';
 
 class ControlBlood extends StatefulWidget {
@@ -68,7 +70,7 @@ class _ControlBloodState extends State<ControlBlood> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -104,7 +106,7 @@ class _ControlBloodState extends State<ControlBlood> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -143,8 +145,13 @@ class _ControlBloodState extends State<ControlBlood> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () => shareBlood(
-                    controllerUpper.text.trim(), controllerLower.text.trim()),
+                onPressed: () {
+                  final DateTime now = DateTime.now();
+                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                  final String formatted = formatter.format(now);
+                  shareBlood(controllerUpper.text.trim(),
+                      controllerLower.text.trim(), formatted);
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -167,7 +174,9 @@ class _ControlBloodState extends State<ControlBlood> {
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: TextButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const HelperPage())),
+                    builder: (BuildContext context) => const HelperPageMobile(
+                          uid: "81aeb3e2-96e3-4d8e-bfeb-737d405ef4cd",
+                        ))),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -191,7 +200,9 @@ class _ControlBloodState extends State<ControlBlood> {
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: TextButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const HelperPage())),
+                    builder: (BuildContext context) => const HelperPageMobile(
+                          uid: "826eff2e-148d-41c9-aa05-8f9f3ad77728",
+                        ))),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

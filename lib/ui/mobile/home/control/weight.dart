@@ -1,5 +1,7 @@
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/ui/mobile/home/action/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
@@ -67,7 +69,7 @@ class _ControlWeightState extends State<ControlWeight> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -102,7 +104,7 @@ class _ControlWeightState extends State<ControlWeight> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -128,7 +130,7 @@ class _ControlWeightState extends State<ControlWeight> {
                       color: Colors.black),
                 ),
                 Text(
-                  '123',
+                  '0',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 50,
@@ -163,8 +165,13 @@ class _ControlWeightState extends State<ControlWeight> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () => shareWeight(
-                    controllerWeight.text.trim(), controllerHeight.text.trim()),
+                onPressed: () {
+                  final DateTime now = DateTime.now();
+                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                  final String formatted = formatter.format(now);
+                  shareWeight(controllerWeight.text.trim(),
+                      controllerHeight.text.trim(), formatted);
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -186,7 +193,9 @@ class _ControlWeightState extends State<ControlWeight> {
             margin: const EdgeInsets.symmetric(vertical: 20),
             child: TextButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const HelperPage())),
+                    builder: (BuildContext context) => const HelperPageMobile(
+                          uid: "9e158575-2eac-498e-ba6c-d904573b3310",
+                        ))),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

@@ -1,8 +1,10 @@
 import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
+import '../action/helper.dart';
 import '../helper/home.dart';
 
 class ControlPulse extends StatefulWidget {
@@ -65,7 +67,7 @@ class _ControlPulseState extends State<ControlPulse> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -83,7 +85,9 @@ class _ControlPulseState extends State<ControlPulse> {
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: TextButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const HelperPage())),
+                    builder: (BuildContext context) => const HelperPageMobile(
+                          uid: "3b093b46-e76b-4626-b491-ef91003d45ce",
+                        ))),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -106,7 +110,9 @@ class _ControlPulseState extends State<ControlPulse> {
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: TextButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const HelperPage())),
+                    builder: (BuildContext context) => const HelperPageMobile(
+                          uid: "ca6b13fc-073a-4b88-ba9b-35043c736b39",
+                        ))),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -152,7 +158,12 @@ class _ControlPulseState extends State<ControlPulse> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () => sharePulse(controllerPulse.text.trim()),
+                onPressed: () {
+                  final DateTime now = DateTime.now();
+                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                  final String formatted = formatter.format(now);
+                  sharePulse(controllerPulse.text.trim(), formatted);
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

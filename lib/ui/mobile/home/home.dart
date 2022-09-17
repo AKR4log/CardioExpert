@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:cardio_expert/ui/mobile/home/action/tablet.dart';
 import 'package:cardio_expert/ui/mobile/home/control/Blood_pressure.dart';
 import 'package:cardio_expert/ui/mobile/home/control/drunk_excreted_liquid.dart';
@@ -9,6 +11,8 @@ import 'package:cardio_expert/ui/mobile/home/reports.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'helper/home.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -351,6 +355,35 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.black)),
                     ),
                   ),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
+                    child: TextButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          side: const BorderSide(
+                              color: Color.fromRGBO(229, 231, 235, 1)),
+                          borderRadius: BorderRadius.circular(15),
+                        )),
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color.fromRGBO(242, 242, 242, 1)),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                vertical: 18, horizontal: 22)),
+                      ),
+                      onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const HelperPage())),
+                      child: const Text('Информационные материалы',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black)),
+                    ),
+                  ),
                   TextButton(
                       onPressed: () => FirebaseAuth.instance.signOut(),
                       child: const Text('Выйти из аккаунта',
@@ -371,64 +404,95 @@ class _HomePageState extends State<HomePage> {
                     if (snapshot.hasData) {
                       List med = snapshot.data.docs;
                       return SizedBox(
-                        width: 300,
+                        width: 310,
                         height: 400,
                         child: ListView(
                           children: med
                               .map(
-                                (e) => Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 18, horizontal: 22),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: const Color.fromRGBO(
-                                          242, 242, 242, 1),
-                                      border: Border.all(
-                                          color: const Color.fromRGBO(
-                                              229, 231, 235, 1))),
-                                  child: Flex(
-                                    direction: Axis.horizontal,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Flexible(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Приём в ' + e['reception_time'],
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 13,
-                                                color: Color.fromRGBO(
-                                                    148, 148, 148, 1)),
-                                          ),
-                                          Text(
-                                            e['name'],
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            e['dosage'] + ' мг',
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 14,
-                                                color: Color.fromRGBO(
-                                                    255, 98, 98, 1)),
-                                          ),
-                                        ],
-                                      )),
-                                      Flexible(
-                                          child: Image.asset(
-                                              'assets/img/tablet.png'))
-                                    ],
-                                  ),
+                                (e) => Flex(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  direction: Axis.horizontal,
+                                  children: [
+                                    Flexible(
+                                      flex: 6,
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 18, horizontal: 22),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            color: const Color.fromRGBO(
+                                                242, 242, 242, 1),
+                                            border: Border.all(
+                                                color: const Color.fromRGBO(
+                                                    229, 231, 235, 1))),
+                                        child: Flex(
+                                          direction: Axis.horizontal,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Flexible(
+                                                child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Приём в ' +
+                                                      e['reception_time_1'],
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 13,
+                                                      color: Color.fromRGBO(
+                                                          148, 148, 148, 1)),
+                                                ),
+                                                Text(
+                                                  e['name'],
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                      color: Colors.black),
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  e['dosage'] + ' мг',
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                      color: Color.fromRGBO(
+                                                          255, 98, 98, 1)),
+                                                ),
+                                              ],
+                                            )),
+                                            Flexible(
+                                                child: Image.asset(
+                                                    'assets/img/tablet.png'))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                        child: IconButton(
+                                      onPressed: () {
+                                        FirebaseFirestore.instance
+                                            .collection("users")
+                                            .doc(FirebaseAuth
+                                                .instance.currentUser.uid)
+                                            .collection("medications")
+                                            .doc(e['uid'])
+                                            .delete()
+                                            .whenComplete(() {
+                                          setState(() {});
+                                        });
+                                      },
+                                      icon: const Icon(Icons.close),
+                                    ))
+                                  ],
                                 ),
                               )
                               .toList(),
@@ -436,9 +500,13 @@ class _HomePageState extends State<HomePage> {
                       );
                     } else {
                       return const SizedBox(
-                          height: 25,
-                          width: 25,
-                          child: Center(child: CircularProgressIndicator()));
+                          width: 300,
+                          height: 400,
+                          child: Center(
+                              child: SizedBox(
+                                  width: 30,
+                                  height: 30,
+                                  child: CircularProgressIndicator())));
                     }
                   },
                 ),

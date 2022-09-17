@@ -1,8 +1,10 @@
 import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
+import '../action/helper.dart';
 import '../helper/home.dart';
 
 class ControlMno extends StatefulWidget {
@@ -65,7 +67,7 @@ class _ControlMnoState extends State<ControlMno> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -104,7 +106,12 @@ class _ControlMnoState extends State<ControlMno> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () => shareMno(controllerMno.text.trim()),
+                onPressed: () {
+                  final DateTime now = DateTime.now();
+                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                  final String formatted = formatter.format(now);
+                  shareMno(controllerMno.text.trim(), formatted);
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -127,7 +134,9 @@ class _ControlMnoState extends State<ControlMno> {
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: TextButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const HelperPage())),
+                    builder: (BuildContext context) => const HelperPageMobile(
+                          uid: "847f3650-3332-492e-be6c-9f69d9d1218f",
+                        ))),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

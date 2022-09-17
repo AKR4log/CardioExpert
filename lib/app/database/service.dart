@@ -76,10 +76,13 @@ Future<String> getPassword() async {
   return prefs.getString('Password');
 }
 
-Future<void> sharePulse(String pulse) async {
+Future<void> sharePulse(String pulse, String date) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
-    return Row(children: [Text('Pulse:'), Text(pulse)]);
+    return Column(children: [
+      Row(children: [Text('Last measurement date: '), Text(date)]),
+      Row(children: [Text('Pulse: '), Text(pulse)])
+    ]);
   }));
   pdf.save();
   final dir = await getExternalStorageDirectory();
@@ -93,10 +96,11 @@ Future<void> sharePulse(String pulse) async {
   );
 }
 
-Future<void> shareWeight(String weight, String height) async {
+Future<void> shareWeight(String weight, String height, String date) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
+      Row(children: [Text('Last measurement date: '), Text(date)]),
       Row(children: [Text('Weight: '), Text(weight)]),
       Row(children: [Text('Height: '), Text(height)]),
     ]);
@@ -113,10 +117,11 @@ Future<void> shareWeight(String weight, String height) async {
   );
 }
 
-Future<void> shareBlood(String upper, String lower) async {
+Future<void> shareBlood(String upper, String lower, String date) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
+      Row(children: [Text('Last measurement date: '), Text(date)]),
       Row(children: [Text('Upper pressure: '), Text(upper)]),
       Row(children: [Text('Lower pressure: '), Text(lower)]),
     ]);
@@ -133,10 +138,11 @@ Future<void> shareBlood(String upper, String lower) async {
   );
 }
 
-Future<void> shareMno(String mno) async {
+Future<void> shareMno(String mno, String date) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
+      Row(children: [Text('Last measurement date: '), Text(date)]),
       Row(children: [Text('INR indicators: '), Text(mno)]),
     ]);
   }));
@@ -152,11 +158,12 @@ Future<void> shareMno(String mno) async {
   );
 }
 
-Future<void> shareLipidProfile(
-    String cholesterol, String ldl, String hdl, String triglycerides) async {
+Future<void> shareLipidProfile(String cholesterol, String ldl, String hdl,
+    String triglycerides, String date) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
+      Row(children: [Text('Last measurement date: '), Text(date)]),
       Row(children: [Text('"Cholesterol": '), Text(cholesterol)]),
       Row(children: [Text('"LDL": '), Text(ldl)]),
       Row(children: [Text('"HDL": '), Text(hdl)]),
@@ -183,10 +190,12 @@ Future<void> shareDrunk(
     String num0612drunk,
     String num1218drunk,
     String num1800drunk,
-    String num0006drunk) async {
+    String num0006drunk,
+    String date) async {
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
+      Row(children: [Text('Last measurement date: '), Text(date)]),
       Row(children: [Text('Drunk from 06:00 to 12:00: '), Text(num0612drunk)]),
       Row(children: [
         Text('Allocated from 06:00 to 12:00: '),
@@ -239,7 +248,13 @@ Future<void> shareReport(
     String d0612,
     String d1218,
     String d1800,
-    String d0006}) async {
+    String d0006,
+    String dateW,
+    String dateP,
+    String dateM,
+    String dateL,
+    String dateB,
+    String dateD}) async {
   var pdf = Document();
   pdf.addPage(Page(
       pageFormat: PdfPageFormat.a4,
@@ -255,20 +270,30 @@ Future<void> shareReport(
                             fontWeight: FontWeight.bold, fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(children: [
-                          Row(children: [
-                            Text('Weight:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(weight, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('Height:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(height, style: const TextStyle(fontSize: 15)),
-                          ]),
-                        ]))
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Text('Last measurement date: ',
+                                    style: const TextStyle(fontSize: 15)),
+                                Text(dateW,
+                                    style: const TextStyle(fontSize: 15))
+                              ]),
+                              Row(children: [
+                                Text('Weight:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(weight,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('Height:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(height,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                            ]))
                   ])),
           Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -280,20 +305,30 @@ Future<void> shareReport(
                             fontWeight: FontWeight.bold, fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(children: [
-                          Row(children: [
-                            Text('Upper pressure:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(upper, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('Lower pressure:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(lower, style: const TextStyle(fontSize: 15)),
-                          ]),
-                        ]))
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Text('Last measurement date: ',
+                                    style: const TextStyle(fontSize: 15)),
+                                Text(dateB,
+                                    style: const TextStyle(fontSize: 15))
+                              ]),
+                              Row(children: [
+                                Text('Upper pressure:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(upper,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('Lower pressure:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(lower,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                            ]))
                   ])),
           Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -305,14 +340,22 @@ Future<void> shareReport(
                             fontWeight: FontWeight.bold, fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(children: [
-                          Row(children: [
-                            Text('Passed the INR, enter your indicator:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(mno, style: const TextStyle(fontSize: 15)),
-                          ]),
-                        ]))
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Text('Last measurement date: ',
+                                    style: const TextStyle(fontSize: 15)),
+                                Text(dateM,
+                                    style: const TextStyle(fontSize: 15))
+                              ]),
+                              Row(children: [
+                                Text('Passed the INR, enter your indicator:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(mno, style: const TextStyle(fontSize: 15)),
+                              ]),
+                            ]))
                   ])),
           Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -324,14 +367,23 @@ Future<void> shareReport(
                             fontWeight: FontWeight.bold, fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(children: [
-                          Row(children: [
-                            Text('Your pulse:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(pulse, style: const TextStyle(fontSize: 15)),
-                          ]),
-                        ]))
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Text('Last measurement date: ',
+                                    style: const TextStyle(fontSize: 15)),
+                                Text(dateP,
+                                    style: const TextStyle(fontSize: 15))
+                              ]),
+                              Row(children: [
+                                Text('Your pulse:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(pulse,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                            ]))
                   ])),
           Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -343,38 +395,46 @@ Future<void> shareReport(
                             fontWeight: FontWeight.bold, fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(children: [
-                          Row(children: [
-                            Text(
-                                'Have passed the tests, enter your "Cholesterol" indicator:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(cholesterol,
-                                style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text(
-                                'Have passed the tests, enter your LDL indicator:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(ldl, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text(
-                                'Have passed the tests, enter your "HDL" indicator:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(hdl, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text(
-                                'PHave passed the tests, enter your indicator "Triglycerides":',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(triglycerides,
-                                style: const TextStyle(fontSize: 15)),
-                          ]),
-                        ]))
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Text('Last measurement date: ',
+                                    style: const TextStyle(fontSize: 15)),
+                                Text(dateL,
+                                    style: const TextStyle(fontSize: 15))
+                              ]),
+                              Row(children: [
+                                Text(
+                                    'Have passed the tests, enter your "Cholesterol" indicator:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(cholesterol,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text(
+                                    'Have passed the tests, enter your LDL indicator:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(ldl, style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text(
+                                    'Have passed the tests, enter your "HDL" indicator:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(hdl, style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text(
+                                    'PHave passed the tests, enter your indicator "Triglycerides":',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(triglycerides,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                            ]))
                   ])),
           Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -386,56 +446,72 @@ Future<void> shareReport(
                             fontWeight: FontWeight.bold, fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(children: [
-                          Row(children: [
-                            Text('6:00 - 12:00 Drunk:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(d0612, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('6:00 - 12:00 Highlighted:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(h0612, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('12:00 - 18:00 Drunk:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(d1218, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('12:00 - 18:00 Highlighted:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(h1218, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('18:00 - 00:00 Drunk:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(d1800, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('18:00 - 00:00 Highlighted:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(h1800, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('00:00 - 6:00 Drunk:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(d0006, style: const TextStyle(fontSize: 15)),
-                          ]),
-                          Row(children: [
-                            Text('00:00 - 6:00 Highlighted:',
-                                style: const TextStyle(fontSize: 15)),
-                            SizedBox(width: 10),
-                            Text(h0006, style: const TextStyle(fontSize: 15)),
-                          ]),
-                        ]))
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Text('Last measurement date: ',
+                                    style: const TextStyle(fontSize: 15)),
+                                Text(dateD,
+                                    style: const TextStyle(fontSize: 15))
+                              ]),
+                              Row(children: [
+                                Text('6:00 - 12:00 Drunk:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(d0612,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('6:00 - 12:00 Highlighted:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(h0612,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('12:00 - 18:00 Drunk:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(d1218,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('12:00 - 18:00 Highlighted:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(h1218,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('18:00 - 00:00 Drunk:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(d1800,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('18:00 - 00:00 Highlighted:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(h1800,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('00:00 - 6:00 Drunk:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(d0006,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                              Row(children: [
+                                Text('00:00 - 6:00 Highlighted:',
+                                    style: const TextStyle(fontSize: 15)),
+                                SizedBox(width: 10),
+                                Text(h0006,
+                                    style: const TextStyle(fontSize: 15)),
+                              ]),
+                            ]))
                   ])),
         ]);
       }));

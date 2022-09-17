@@ -1,8 +1,10 @@
 import 'package:cardio_expert/app/database/service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/database/firebase.dart';
+import '../action/helper.dart';
 import '../helper/home.dart';
 
 class LipidProfile extends StatefulWidget {
@@ -72,7 +74,7 @@ class _LipidProfileState extends State<LipidProfile> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -108,7 +110,7 @@ class _LipidProfileState extends State<LipidProfile> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -144,7 +146,7 @@ class _LipidProfileState extends State<LipidProfile> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -180,7 +182,7 @@ class _LipidProfileState extends State<LipidProfile> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: '123',
+                    hintText: '0',
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -223,11 +225,17 @@ class _LipidProfileState extends State<LipidProfile> {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: TextButton(
-                onPressed: () => shareLipidProfile(
-                    controllerCholesterol.text.trim(),
-                    controllerLdl.text.trim(),
-                    controllerHdl.text.trim(),
-                    controllerTriglycerides.text.trim()),
+                onPressed: () {
+                  final DateTime now = DateTime.now();
+                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                  final String formatted = formatter.format(now);
+                  shareLipidProfile(
+                      controllerCholesterol.text.trim(),
+                      controllerLdl.text.trim(),
+                      controllerHdl.text.trim(),
+                      controllerTriglycerides.text.trim(),
+                      formatted);
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -250,7 +258,9 @@ class _LipidProfileState extends State<LipidProfile> {
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: TextButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const HelperPage())),
+                    builder: (BuildContext context) => const HelperPageMobile(
+                          uid: "fc9d0f36-f820-4d26-bc1d-0ccbfb55bdc8",
+                        ))),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

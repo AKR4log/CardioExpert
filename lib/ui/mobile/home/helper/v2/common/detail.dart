@@ -28,34 +28,44 @@ class _DetailMobileState extends State<DetailMobile> {
         backgroundColor: Colors.transparent,
         leading: const BackButton(color: Colors.black),
       ),
-      body: StreamBuilder<V2Board>(
-          stream: MainStateMobile(
-                  uidV2Board: widget.v2boardUid, uidBoard: widget.boardUid)
-              .getV2Boards,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              V2Board board = snapshot.data;
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      board.name,
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      board.description,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                    )
-                  ],
+      body: SingleChildScrollView(
+        child: StreamBuilder<V2Board>(
+            stream: MainStateMobile(
+                    uidV2Board: widget.v2boardUid, uidBoard: widget.boardUid)
+                .getV2Boards,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                V2Board board = snapshot.data;
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        board.name,
+                        style: const TextStyle(
+                            fontSize: 26, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        board.description,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                );
+              }
+              return const Center(
+                child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: CircularProgressIndicator(),
                 ),
               );
-            }
-          }),
+            }),
+      ),
     );
   }
 }
