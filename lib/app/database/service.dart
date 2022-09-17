@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -77,11 +78,30 @@ Future<String> getPassword() async {
 }
 
 Future<void> sharePulse(String pulse, String date) async {
+  var data = await rootBundle.load("assets/font/Montserrat-Regular.ttf");
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Last measurement date: '), Text(date)]),
-      Row(children: [Text('Pulse: '), Text(pulse)])
+      Row(children: [
+        Text('Дата последнего измерения: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(date,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Ваш пульс: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(pulse,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ])
     ]);
   }));
   pdf.save();
@@ -90,19 +110,46 @@ Future<void> sharePulse(String pulse, String date) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'My pulse',
-    text: 'My measured pulse',
+    title: 'Мой пульс',
     filePath: file.path,
   );
 }
 
 Future<void> shareWeight(String weight, String height, String date) async {
+  var data = await rootBundle.load("assets/font/Montserrat-Regular.ttf");
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Last measurement date: '), Text(date)]),
-      Row(children: [Text('Weight: '), Text(weight)]),
-      Row(children: [Text('Height: '), Text(height)]),
+      Row(children: [
+        Text('Дата последнего измерения: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(date,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Вес: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(weight,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Рост: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(height,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
     ]);
   }));
   pdf.save();
@@ -111,19 +158,46 @@ Future<void> shareWeight(String weight, String height, String date) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'My weight index',
-    text: 'My measured weight and height',
+    title: 'Мой вес и рост',
     filePath: file.path,
   );
 }
 
 Future<void> shareBlood(String upper, String lower, String date) async {
+  var data = await rootBundle.load("assets/font/Montserrat-Regular.ttf");
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Last measurement date: '), Text(date)]),
-      Row(children: [Text('Upper pressure: '), Text(upper)]),
-      Row(children: [Text('Lower pressure: '), Text(lower)]),
+      Row(children: [
+        Text('Дата последнего измерения: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(date,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Верхнее давление: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(upper,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Нижнее давление: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(lower,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
     ]);
   }));
   pdf.save();
@@ -132,18 +206,36 @@ Future<void> shareBlood(String upper, String lower, String date) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Control art. pressure',
-    text: 'My measured pressure',
+    title: 'Контроль артериального давления',
     filePath: file.path,
   );
 }
 
 Future<void> shareMno(String mno, String date) async {
+  var data = await rootBundle.load("assets/font/Montserrat-Regular.ttf");
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Last measurement date: '), Text(date)]),
-      Row(children: [Text('INR indicators: '), Text(mno)]),
+      Row(children: [
+        Text('Дата последнего измерения: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(date,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('MNO показатель: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(mno,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
     ]);
   }));
   pdf.save();
@@ -152,22 +244,67 @@ Future<void> shareMno(String mno, String date) async {
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'INR indicators',
-    text: 'My measured by ME',
+    title: 'MNO показатель',
     filePath: file.path,
   );
 }
 
 Future<void> shareLipidProfile(String cholesterol, String ldl, String hdl,
     String triglycerides, String date) async {
+  var data = await rootBundle.load("assets/font/Montserrat-Regular.ttf");
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Last measurement date: '), Text(date)]),
-      Row(children: [Text('"Cholesterol": '), Text(cholesterol)]),
-      Row(children: [Text('"LDL": '), Text(ldl)]),
-      Row(children: [Text('"HDL": '), Text(hdl)]),
-      Row(children: [Text('"Triglycerides": '), Text(triglycerides)]),
+      Row(children: [
+        Text('Дата последнего измерения: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(date,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('"Холестерин": ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(cholesterol,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('"ЛПНП": ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(ldl,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('"ЛПВП": ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(hdl,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('"Триглицериды": ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(triglycerides,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
     ]);
   }));
   pdf.save();
@@ -176,8 +313,7 @@ Future<void> shareLipidProfile(String cholesterol, String ldl, String hdl,
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Lipid profile',
-    text: 'My measured lipid profile',
+    title: 'Липидный профиль',
     filePath: file.path,
   );
 }
@@ -192,29 +328,99 @@ Future<void> shareDrunk(
     String num1800drunk,
     String num0006drunk,
     String date) async {
+  var data = await rootBundle.load("assets/font/Montserrat-Regular.ttf");
   var pdf = Document();
   pdf.addPage(Page(build: (context) {
     return Column(children: [
-      Row(children: [Text('Last measurement date: '), Text(date)]),
-      Row(children: [Text('Drunk from 06:00 to 12:00: '), Text(num0612drunk)]),
       Row(children: [
-        Text('Allocated from 06:00 to 12:00: '),
-        Text(num0612highlighted)
+        Text('Дата последнего измерения: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(date,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
       ]),
-      Row(children: [Text('Drunk from 12:00 to 18:00: '), Text(num1218drunk)]),
       Row(children: [
-        Text('Allocated from 12:00 to 18:00: '),
-        Text(num1218drunk)
+        Text('Выпито с 06:00 по 12:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num0612drunk,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
       ]),
-      Row(children: [Text('Drunk from 18:00 to 00:00: '), Text(num1800drunk)]),
       Row(children: [
-        Text('Allocated from 18:00 to 00:00: '),
-        Text(num1800highlighted)
+        Text('Выделино с 06:00 по 12:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num0612highlighted,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
       ]),
-      Row(children: [Text('Drunk from 00:00 to 06:00: '), Text(num0006drunk)]),
       Row(children: [
-        Text('Allocated from 00:00 to 06:00: '),
-        Text(num0006highlighted)
+        Text('Выпито с 12:00 по 18:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num1218drunk,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Выделино с 12:00 по 18:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num1218drunk,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Выпито с 18:00 по 00:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num1800drunk,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Выделино с 18:00 по 00:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num1800highlighted,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Выпито с 00:00 по 06:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num0006drunk,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
+      ]),
+      Row(children: [
+        Text('Выделино с 00:00 по 06:00: ',
+            style: TextStyle(
+              font: Font.ttf(data),
+            )),
+        Text(num0006highlighted,
+            style: TextStyle(
+              font: Font.ttf(data),
+            ))
       ]),
     ]);
   }));
@@ -224,8 +430,7 @@ Future<void> shareDrunk(
 
   var file = await File(path).writeAsBytes(await pdf.save());
   await FlutterShare.shareFile(
-    title: 'Fluid control',
-    text: 'Control of the drunk and excreted liquid',
+    title: 'Контроль воды',
     filePath: file.path,
   );
 }
@@ -255,7 +460,9 @@ Future<void> shareReport(
     String dateL,
     String dateB,
     String dateD}) async {
-  var pdf = Document();
+  var pdf = Document(version: PdfVersion.pdf_1_5, verbose: true);
+  var data = await rootBundle.load("assets/font/Montserrat-Regular.ttf");
+
   pdf.addPage(Page(
       pageFormat: PdfPageFormat.a4,
       build: (context) {
@@ -265,33 +472,41 @@ Future<void> shareReport(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Weight control. Body mass Index',
+                    Text('Контроль веса. Индекса массы тела',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold,
+                            font: Font.ttf(data),
+                            fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(children: [
-                                Text('Last measurement date: ',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Дата последнего измерения: ',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 Text(dateW,
-                                    style: const TextStyle(fontSize: 15))
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data)))
                               ]),
                               Row(children: [
-                                Text('Weight:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Вес:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(weight,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('Height:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Рост:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(height,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                             ]))
                   ])),
@@ -300,33 +515,41 @@ Future<void> shareReport(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Blood pressure monitoring',
+                    Text('Мониторинг артериального давления',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold,
+                            font: Font.ttf(data),
+                            fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(children: [
-                                Text('Last measurement date: ',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Дата последнего измерения: ',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 Text(dateB,
-                                    style: const TextStyle(fontSize: 15))
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data)))
                               ]),
                               Row(children: [
-                                Text('Upper pressure:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Верхнее давление:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(upper,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('Lower pressure:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Нижнее давление:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(lower,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                             ]))
                   ])),
@@ -335,25 +558,32 @@ Future<void> shareReport(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Control of INR when taking Warfarin',
+                    Text('Контроль МНО при приеме Варфарина',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold,
+                            font: Font.ttf(data),
+                            fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(children: [
-                                Text('Last measurement date: ',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Дата последнего измерения: ',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 Text(dateM,
-                                    style: const TextStyle(fontSize: 15))
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data)))
                               ]),
                               Row(children: [
-                                Text('Passed the INR, enter your indicator:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Сдали МНО, введите ваш показатель:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
-                                Text(mno, style: const TextStyle(fontSize: 15)),
+                                Text(mno,
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                             ]))
                   ])),
@@ -362,26 +592,32 @@ Future<void> shareReport(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Pulse monitoring',
+                    Text('Мониторинг пульса',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold,
+                            font: Font.ttf(data),
+                            fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(children: [
-                                Text('Last measurement date: ',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Дата последнего измерения: ',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 Text(dateP,
-                                    style: const TextStyle(fontSize: 15))
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data)))
                               ]),
                               Row(children: [
-                                Text('Your pulse:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Ваш пульс:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(pulse,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                             ]))
                   ])),
@@ -390,49 +626,63 @@ Future<void> shareReport(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lipid profile',
+                    Text('Липидный профиль',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold,
+                            font: Font.ttf(data),
+                            fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(children: [
-                                Text('Last measurement date: ',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Дата последнего измерения: ',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 Text(dateL,
-                                    style: const TextStyle(fontSize: 15))
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data)))
                               ]),
                               Row(children: [
                                 Text(
-                                    'Have passed the tests, enter your "Cholesterol" indicator:',
-                                    style: const TextStyle(fontSize: 15)),
+                                    'Сдали анализы, введите свой показатель "Холестерин":',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(cholesterol,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
                                 Text(
-                                    'Have passed the tests, enter your LDL indicator:',
-                                    style: const TextStyle(fontSize: 15)),
+                                    'Пройдя тесты, введите свой показатель ЛПНП:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
-                                Text(ldl, style: const TextStyle(fontSize: 15)),
+                                Text(ldl,
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
                                 Text(
-                                    'Have passed the tests, enter your "HDL" indicator:',
-                                    style: const TextStyle(fontSize: 15)),
+                                    'Пройдя тесты, введите свой показатель "ЛПВП":',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
-                                Text(hdl, style: const TextStyle(fontSize: 15)),
+                                Text(hdl,
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
                                 Text(
-                                    'PHave passed the tests, enter your indicator "Triglycerides":',
-                                    style: const TextStyle(fontSize: 15)),
+                                    'Сдали анализы, введите свой показатель "Триглицериды".:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(triglycerides,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                             ]))
                   ])),
@@ -441,75 +691,95 @@ Future<void> shareReport(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Control of the drunk and excreted liquid',
+                    Text('Контроль выпитой и выделяемой жидкости',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold,
+                            font: Font.ttf(data),
+                            fontSize: 22)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(children: [
-                                Text('Last measurement date: ',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('Дата последнего измерения: ',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 Text(dateD,
-                                    style: const TextStyle(fontSize: 15))
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data)))
                               ]),
                               Row(children: [
-                                Text('6:00 - 12:00 Drunk:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('6:00 - 12:00 Выпито:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(d0612,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('6:00 - 12:00 Highlighted:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('6:00 - 12:00 Выделено:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(h0612,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('12:00 - 18:00 Drunk:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('12:00 - 18:00 Выпито:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(d1218,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('12:00 - 18:00 Highlighted:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('12:00 - 18:00 Выделено:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(h1218,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('18:00 - 00:00 Drunk:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('18:00 - 00:00 Выпито:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(d1800,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('18:00 - 00:00 Highlighted:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('18:00 - 00:00 Выделено:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(h1800,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('00:00 - 6:00 Drunk:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('00:00 - 6:00 Выпито:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(d0006,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                               Row(children: [
-                                Text('00:00 - 6:00 Highlighted:',
-                                    style: const TextStyle(fontSize: 15)),
+                                Text('00:00 - 6:00 Выделено:',
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                                 SizedBox(width: 10),
                                 Text(h0006,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(
+                                        fontSize: 15, font: Font.ttf(data))),
                               ]),
                             ]))
                   ])),
