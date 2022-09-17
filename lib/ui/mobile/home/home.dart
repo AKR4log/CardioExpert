@@ -442,8 +442,7 @@ class _HomePageState extends State<HomePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Приём в ' +
-                                                      e['reception_time_1'],
+                                                  'Приём в ${e['reception_time_1']}, в ${e['reception_time_2']}, в ${e['reception_time_3']}',
                                                   style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
