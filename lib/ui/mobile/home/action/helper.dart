@@ -16,10 +16,6 @@ class _HelperPageMobileState extends State<HelperPageMobile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            widget.uid,
-            style: const TextStyle(color: Colors.black),
-          ),
           elevation: 0,
           backgroundColor: Colors.transparent,
           leading: const BackButton(color: Colors.black),

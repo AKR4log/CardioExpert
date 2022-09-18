@@ -25,23 +25,29 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAuth.instance.currentUser.uid != null &&
-          FirebaseAuth.instance.currentUser.uid != ''
-      ? FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser.uid)
-          .collection('medications')
-          .get()
-          .then((value) async {
-          List<String> list = [];
-          for (var element in value.docs) {
-            list.add(element['reception_time_1'].toString());
-            list.add(element['reception_time_2'].toString());
-            list.add(element['reception_time_3'].toString());
-          }
-          await setTimeMed(list);
-        })
-      : null;
+  if (!kIsWeb) {
+    FirebaseAuth.instance.authStateChanges().listen((User user) {
+      if (user != null) {
+        FirebaseAuth.instance.currentUser.uid != null &&
+                FirebaseAuth.instance.currentUser.uid != ''
+            ? FirebaseFirestore.instance
+                .collection('users')
+                .doc(FirebaseAuth.instance.currentUser.uid)
+                .collection('medications')
+                .get()
+                .then((value) async {
+                List<String> list = [];
+                for (var element in value.docs) {
+                  list.add(element['reception_time_1'].toString());
+                  list.add(element['reception_time_2'].toString());
+                  list.add(element['reception_time_3'].toString());
+                }
+                await setTimeMed(list);
+              })
+            : null;
+      }
+    });
+  }
   Timer.periodic(const Duration(seconds: 5), (_) async {
     await getTimeMed().then((value) {
       debugPrint(value.toString());

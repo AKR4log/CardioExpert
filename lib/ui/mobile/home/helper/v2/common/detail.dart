@@ -20,10 +20,6 @@ class _DetailMobileState extends State<DetailMobile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.v2boardUid,
-          style: const TextStyle(color: Colors.black),
-        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: const BackButton(color: Colors.black),

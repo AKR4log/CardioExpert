@@ -17,12 +17,17 @@ class ControlWeight extends StatefulWidget {
 class _ControlWeightState extends State<ControlWeight> {
   TextEditingController controllerWeight = TextEditingController();
   TextEditingController controllerHeight = TextEditingController();
+  double imt = 0;
 
   @override
   void initState() {
     controllerHeight = TextEditingController();
     controllerWeight = TextEditingController();
     super.initState();
+  }
+
+  imtFun() {
+    return 12 / (50 * 50);
   }
 
   @override
@@ -66,6 +71,7 @@ class _ControlWeightState extends State<ControlWeight> {
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -78,6 +84,14 @@ class _ControlWeightState extends State<ControlWeight> {
                         borderSide: BorderSide(
                             color: Color.fromRGBO(229, 231, 235, 1))),
                   ),
+                  onChanged: (val) {
+                    int weight = int.parse(val);
+                    int height = int.parse(controllerHeight.text);
+
+                    setState(() {
+                      imt = weight / (height * height);
+                    });
+                  },
                 ),
               ],
             ),
@@ -101,6 +115,7 @@ class _ControlWeightState extends State<ControlWeight> {
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -113,6 +128,14 @@ class _ControlWeightState extends State<ControlWeight> {
                         borderSide: BorderSide(
                             color: Color.fromRGBO(229, 231, 235, 1))),
                   ),
+                  onChanged: (val) {
+                    int height = int.parse(val);
+                    int weight = int.parse(controllerWeight.text);
+
+                    setState(() {
+                      imt = weight / (height * height);
+                    });
+                  },
                 ),
               ],
             ),
@@ -120,8 +143,8 @@ class _ControlWeightState extends State<ControlWeight> {
           Container(
             margin: const EdgeInsets.symmetric(vertical: 34),
             child: Center(
-              child: Column(children: const [
-                Text(
+              child: Column(children: [
+                const Text(
                   'Ваш индекс массы\nтела составил:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -129,12 +152,17 @@ class _ControlWeightState extends State<ControlWeight> {
                       fontSize: 17,
                       color: Colors.black),
                 ),
-                Text(
-                  '0',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 50,
-                      color: Colors.black),
+                SizedBox(
+                  width: 175,
+                  child: Text(
+                    imt.toString(),
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 50,
+                        color: Colors.black),
+                  ),
                 )
               ]),
             ),

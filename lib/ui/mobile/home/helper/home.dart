@@ -30,7 +30,7 @@ class _HelperPageState extends State<HelperPage> {
           padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
           child: SizedBox(
             width: 350,
-            height: 500,
+            height: MediaQuery.of(context).size.height,
             child: StreamProvider<List<Board>>.value(
               value: MainStateMobile().getAllBoards,
               initialData: const [],

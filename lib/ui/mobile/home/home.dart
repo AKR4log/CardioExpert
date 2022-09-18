@@ -442,7 +442,33 @@ class _HomePageState extends State<HomePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Приём в ${e['reception_time_1']}, в ${e['reception_time_2']}, в ${e['reception_time_3']}',
+                                                  e['reception_time_1'] !=
+                                                              null &&
+                                                          e['reception_time_1'] !=
+                                                              '' &&
+                                                          e['reception_time_2'] !=
+                                                              null &&
+                                                          e['reception_time_2'] !=
+                                                              '' &&
+                                                          e['reception_time_3'] !=
+                                                              null &&
+                                                          e['reception_time_3'] !=
+                                                              ''
+                                                      ? 'Приём в ${e['reception_time_1']}, в ${e['reception_time_2']}, в ${e['reception_time_3']}'
+                                                      : e['reception_time_1'] != null &&
+                                                              e['reception_time_1'] !=
+                                                                  '' &&
+                                                              e['reception_time_2'] !=
+                                                                  null &&
+                                                              e['reception_time_2'] !=
+                                                                  ''
+                                                          ? 'Приём в ${e['reception_time_1']}, в ${e['reception_time_2']}'
+                                                          : e['reception_time_1'] !=
+                                                                      null &&
+                                                                  e['reception_time_1'] !=
+                                                                      ''
+                                                              ? 'Приём в ${e['reception_time_1']}'
+                                                              : const SizedBox(),
                                                   style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,

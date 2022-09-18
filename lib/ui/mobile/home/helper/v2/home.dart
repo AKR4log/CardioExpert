@@ -31,7 +31,7 @@ class _V2HomeState extends State<V2Home> {
           padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
           child: SizedBox(
             width: 350,
-            height: 500,
+            height: MediaQuery.of(context).size.height,
             child: StreamProvider<List<V2Board>>.value(
               value: MainStateMobile(uidBoard: widget.uidBoard).getAllV2Boards,
               initialData: const [],
