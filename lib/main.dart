@@ -25,52 +25,60 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  if (!kIsWeb) {
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
-      if (user != null) {
-        FirebaseAuth.instance.currentUser.uid != null &&
-                FirebaseAuth.instance.currentUser.uid != ''
-            ? FirebaseFirestore.instance
+  FirebaseAuth.instance.authStateChanges().listen((User user) {
+    if (user != null) {
+      Timer.periodic(const Duration(seconds: 5), (_) async {
+        await getEmail().then((value) {
+          if (value != null && value != '') {
+            FirebaseFirestore.instance
                 .collection('users')
                 .doc(FirebaseAuth.instance.currentUser.uid)
                 .collection('medications')
                 .get()
                 .then((value) async {
-                List<String> list = [];
-                for (var element in value.docs) {
+              List<String> list = [];
+              for (var element in value.docs) {
+                if (element['reception_time_1'].toString() != 'null') {
                   list.add(element['reception_time_1'].toString());
+                }
+                if (element['reception_time_2'].toString() != 'null') {
                   list.add(element['reception_time_2'].toString());
+                }
+                if (element['reception_time_3'].toString() != 'null') {
                   list.add(element['reception_time_3'].toString());
                 }
-                await setTimeMed(list);
-              })
-            : null;
-      }
-    });
-  }
-  Timer.periodic(const Duration(seconds: 5), (_) async {
-    await getTimeMed().then((value) {
-      debugPrint(value.toString());
-      for (var e in value) {
-        var hour = DateTime.now().hour;
-        var minute = DateTime.now().minute;
-        if ("$hour:$minute" == e.toString()) {
-          flutterLocalNotificationsPlugin.show(
-            DateTime.now().hour.hashCode,
-            'Новое уведомление',
-            "Пора принять таблетки",
-            const NotificationDetails(
-              android: AndroidNotificationDetails(
-                'cardio_expert',
-                'com.akr4log.cardio_expert',
-                icon: 'mini_logo',
-                priority: Priority.high,
-              ),
-            ),
-          );
-        }
-      }
-    });
+              }
+              await setTimeMed(list);
+              await getTimeMed().then((value) {
+                debugPrint(value.toString());
+                for (var e in value) {
+                  var hour = DateTime.now().hour.toString();
+                  if (hour.length == 1) {
+                    hour = '0$hour';
+                  }
+                  var minute = DateTime.now().minute;
+                  if ("$hour:$minute" == e.toString()) {
+                    flutterLocalNotificationsPlugin.show(
+                      DateTime.now().hour.hashCode,
+                      'Новое уведомление',
+                      "Пора принять таблетки",
+                      const NotificationDetails(
+                        android: AndroidNotificationDetails(
+                          'cardio_expert',
+                          'com.akr4log.cardio_expert',
+                          icon: 'mini_logo',
+                          priority: Priority.high,
+                        ),
+                      ),
+                    );
+                  }
+                }
+              });
+            });
+          }
+        });
+      });
+    }
   });
 
   runApp(const MyApp());

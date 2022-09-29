@@ -24,7 +24,9 @@ class _AddTabletState extends State<AddTablet> {
     final DateTimeRange picked = await showDateRangePicker(
         context: context,
         firstDate: DateTime(DateTime.now().year - 5),
-        lastDate: DateTime(DateTime.now().year + 5),
+        lastDate: DateTime(DateTime.now().year + 100),
+        fieldStartHintText: 'mm/dd/yyyy',
+        fieldEndHintText: 'mm/dd/yyyy',
         initialDateRange: DateTimeRange(
           end: DateTime(DateTime.now().year, DateTime.now().month,
               DateTime.now().day + 13),

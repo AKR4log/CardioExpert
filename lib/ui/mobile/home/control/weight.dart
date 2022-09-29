@@ -1,6 +1,7 @@
 import 'package:cardio_expert/app/database/service.dart';
 import 'package:cardio_expert/ui/mobile/home/action/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -24,10 +25,6 @@ class _ControlWeightState extends State<ControlWeight> {
     controllerHeight = TextEditingController();
     controllerWeight = TextEditingController();
     super.initState();
-  }
-
-  imtFun() {
-    return 12 / (50 * 50);
   }
 
   @override
@@ -85,8 +82,8 @@ class _ControlWeightState extends State<ControlWeight> {
                             color: Color.fromRGBO(229, 231, 235, 1))),
                   ),
                   onChanged: (val) {
-                    int weight = int.parse(val);
-                    int height = int.parse(controllerHeight.text);
+                    double weight = double.parse(val);
+                    double height = double.parse(controllerHeight.text);
 
                     setState(() {
                       imt = weight / (height * height);
@@ -116,6 +113,7 @@ class _ControlWeightState extends State<ControlWeight> {
                       fontSize: 15,
                       color: Colors.black),
                   keyboardType: TextInputType.number,
+                  inputFormatters: [MaskedInputFormatter('#.##')],
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -129,8 +127,8 @@ class _ControlWeightState extends State<ControlWeight> {
                             color: Color.fromRGBO(229, 231, 235, 1))),
                   ),
                   onChanged: (val) {
-                    int height = int.parse(val);
-                    int weight = int.parse(controllerWeight.text);
+                    double height = double.parse(val);
+                    double weight = double.parse(controllerWeight.text);
 
                     setState(() {
                       imt = weight / (height * height);

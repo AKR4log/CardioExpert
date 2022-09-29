@@ -34,6 +34,7 @@ class Cloud extends AppStateMobile {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       user = userCredential.user;
+      setEmail(email);
       refU.doc(userCredential.user.uid).set({
         'name': name,
         'surname': surname,
@@ -60,6 +61,7 @@ class Cloud extends AppStateMobile {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+      setEmail(email);
       if (userCredential.user.uid != '') {
         return Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) => const HomePage()));
