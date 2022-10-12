@@ -1,3 +1,4 @@
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/mobile/home/home.dart';
 import 'package:flutter/material.dart';
 
@@ -42,18 +43,20 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: Image.asset('assets/img/MedicalRecord.png',
                         height: 200, width: 200),
                   ),
-                  const Text(
-                    'Добро пожаловать\nПользователь !',
+                  Text(
+                    AppLocalizations.of(context).translate('welcome_title'),
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 18),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(
+                  Padding(
+                    padding: const EdgeInsets.only(
                         bottom: 16, top: 20, left: 40, right: 40),
                     child: Text(
-                      'Здоровый человек должен следить за своим здоровьем и своими показателями, а человек, страдающий хроническими сердечно-сосудистыми заболеваниями обязан.\nЭто приложение является вашим дневником самоконтроля, куда вы можете вносить свои показатели, а также найти информационные материалы.',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+                      AppLocalizations.of(context)
+                          .translate('welcome_description'),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 13),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -76,8 +79,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Дневник самоконтроля',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context).translate('self_control'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -98,8 +102,10 @@ class _WelcomePageState extends State<WelcomePage> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Информационные материалы',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context)
+                        .translate('informational_materials'),
+                    style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),

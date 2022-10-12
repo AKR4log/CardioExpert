@@ -1,3 +1,4 @@
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/mobile/connect/reg/reg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,9 +54,10 @@ class _ConnectPageState extends State<ConnectPage> {
                   child: Image.asset('assets/img/welcome.png',
                       height: 200, width: 200),
                 ),
-                const Text(
-                  'Добро пожаловать !',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                Text(
+                  AppLocalizations.of(context).translate('welcome_title'),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 18),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 19, bottom: 19),
@@ -68,7 +70,8 @@ class _ConnectPageState extends State<ConnectPage> {
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       const RegPage())),
-                          child: const Text('Зарегистрироваться')),
+                          child: Text(AppLocalizations.of(context)
+                              .translate('register'))),
                     ],
                   ),
                 )
@@ -80,7 +83,7 @@ class _ConnectPageState extends State<ConnectPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Email:',
+              const Text('Email',
                   style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerEmail,
@@ -93,11 +96,6 @@ class _ConnectPageState extends State<ConnectPage> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
               ),
             ],
           ),
@@ -107,8 +105,9 @@ class _ConnectPageState extends State<ConnectPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Пароль:',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
+              Text(AppLocalizations.of(context).translate('password'),
+                  style:
+                      const TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerPassword,
                 obscureText: true,
@@ -122,11 +121,6 @@ class _ConnectPageState extends State<ConnectPage> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
               ),
             ],
           ),
@@ -163,8 +157,8 @@ class _ConnectPageState extends State<ConnectPage> {
               padding: MaterialStateProperty.all(
                   const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
             ),
-            child: const Text('Войти',
-                style: TextStyle(
+            child: Text(AppLocalizations.of(context).translate('login'),
+                style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     color: Colors.white))),

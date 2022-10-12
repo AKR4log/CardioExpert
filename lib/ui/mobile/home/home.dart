@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/mobile/home/action/tablet.dart';
 import 'package:cardio_expert/ui/mobile/home/control/Blood_pressure.dart';
 import 'package:cardio_expert/ui/mobile/home/control/drunk_excreted_liquid.dart';
@@ -50,9 +51,9 @@ class _HomePageState extends State<HomePage> {
                       color: isLeft
                           ? const Color.fromRGBO(255, 98, 98, 1)
                           : const Color.fromRGBO(148, 148, 148, 1)),
-                  child: const Center(
+                  child: Center(
                       child: Text(
-                    'Дневник самоконтроля',
+                    AppLocalizations.of(context).translate('self_control'),
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,

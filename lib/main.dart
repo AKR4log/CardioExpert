@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'app/database/firebase.dart';
@@ -15,6 +16,7 @@ import 'app/mobile/state/app_state.dart';
 import 'app/mobile/state/main_state.dart';
 import 'app/routes/routes.dart';
 import 'firebase_options.dart';
+import 'localization.dart';
 import 'ui/mobile/splash.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -84,8 +86,26 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key key}) : super(key: key);
+
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
+    state.changeLanguage(newLocale);
+  }
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale;
+
+  changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +119,23 @@ class MyApp extends StatelessWidget {
                     create: (_) => MainStateMobile()),
               ],
             child: MaterialApp(
+              supportedLocales: const [Locale("ru", "RU"), Locale("kk", "KZ")],
+              locale: _locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              localeResolutionCallback: (locale, supportedLocates) {
+                for (var supportedLocale in supportedLocates) {
+                  if (supportedLocale.languageCode == locale.languageCode &&
+                      supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocates.first;
+              },
               shortcuts: {
                 LogicalKeySet(LogicalKeyboardKey.space): const ActivateIntent(),
               },
@@ -118,6 +155,23 @@ class MyApp extends StatelessWidget {
                   create: (_) => MainStateMobile()),
             ],
             child: MaterialApp(
+              supportedLocales: const [Locale("ru", "RU"), Locale("kk", "KZ")],
+              locale: _locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              localeResolutionCallback: (locale, supportedLocates) {
+                for (var supportedLocale in supportedLocates) {
+                  if (supportedLocale.languageCode == locale.languageCode &&
+                      supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocates.first;
+              },
               theme: ThemeData(fontFamily: 'Montserrat'),
               title: 'CardioExpert',
               debugShowCheckedModeBanner: false,

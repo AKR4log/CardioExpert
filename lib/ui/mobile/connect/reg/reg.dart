@@ -1,5 +1,6 @@
 import 'package:cardio_expert/app/database/firebase.dart';
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/mobile/connect/connect.dart';
 import 'package:cardio_expert/ui/mobile/connect/reg/password.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +62,10 @@ class _RegPageState extends State<RegPage> {
                   child: Image.asset('assets/img/welcome.png',
                       height: 200, width: 200),
                 ),
-                const Text(
-                  'Добро пожаловать !',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                 Text(
+                      AppLocalizations.of(context).translate('welcome_title')
+,
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 19, bottom: 19),
@@ -75,10 +77,7 @@ class _RegPageState extends State<RegPage> {
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       const ConnectPage())),
-                          child: const Text('Войти')),
-                      // TextButton(
-                      //     onPressed: () {},
-                      //     child: const Text('Зарегистрироваться')),
+                          child:  Text(AppLocalizations.of(context).translate('login'))),
                     ],
                   ),
                 )
@@ -90,7 +89,7 @@ class _RegPageState extends State<RegPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Email:',
+              const Text('Email',
                   style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerEmail,
@@ -117,8 +116,8 @@ class _RegPageState extends State<RegPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Фамилия:',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
+               Text(AppLocalizations.of(context).translate('last_name'),
+                  style: const TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerSurname,
                 keyboardType: TextInputType.text,
@@ -130,11 +129,7 @@ class _RegPageState extends State<RegPage> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
+                
               ),
             ],
           ),
@@ -144,8 +139,8 @@ class _RegPageState extends State<RegPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Имя:',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
+               Text(AppLocalizations.of(context).translate('first_name'),
+                  style: const TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerName,
                 keyboardType: TextInputType.text,
@@ -157,11 +152,7 @@ class _RegPageState extends State<RegPage> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
+                
               ),
             ],
           ),
@@ -171,8 +162,8 @@ class _RegPageState extends State<RegPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Возраст:',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
+               Text(AppLocalizations.of(context).translate('age'),
+                  style: const TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerAge,
                 keyboardType: TextInputType.number,
@@ -184,11 +175,7 @@ class _RegPageState extends State<RegPage> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
+                
               ),
             ],
           ),
@@ -198,8 +185,8 @@ class _RegPageState extends State<RegPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Ф.И.О. вашего врача',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
+               Text(AppLocalizations.of(context).translate('full_doctor_name'),
+                  style: const TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerFullNameYourDoctor,
                 keyboardType: TextInputType.text,
@@ -211,11 +198,7 @@ class _RegPageState extends State<RegPage> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
+                
               ),
             ],
           ),
@@ -225,8 +208,8 @@ class _RegPageState extends State<RegPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Номер телефона вашего врача',
-                  style: TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
+               Text(AppLocalizations.of(context).translate('doctor_number_phone'),
+                  style: const TextStyle(color: Color.fromRGBO(111, 111, 111, 1))),
               TextField(
                 controller: controllerPhoneNumberYourDoctor,
                 keyboardType: TextInputType.phone,
@@ -238,11 +221,7 @@ class _RegPageState extends State<RegPage> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromRGBO(66, 76, 109, 1)))),
-                onChanged: (val) {
-                  // setState(() {
-                  //   errorMailLength = false;
-                  // });
-                },
+                
               ),
             ],
           ),
@@ -250,7 +229,6 @@ class _RegPageState extends State<RegPage> {
         const SizedBox(height: 35),
         TextButton(
             onPressed: () {
-              // cloud.createNewUser(context, 'as');
               setName(controllerName.text.trim()).whenComplete(() =>
                   setSurname(controllerSurname.text.trim()).whenComplete(() =>
                       setAge(controllerAge.text.trim()).whenComplete(() =>
@@ -269,8 +247,8 @@ class _RegPageState extends State<RegPage> {
               padding: MaterialStateProperty.all(
                   const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
             ),
-            child: const Text('Далее',
-                style: TextStyle(
+            child:  Text(AppLocalizations.of(context).translate('done'),
+                style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     color: Colors.white))),

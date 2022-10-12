@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/mobile/connect/reg/access.dart';
 import 'package:flutter/material.dart';
 
@@ -49,9 +50,10 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
                   child: Image.asset('assets/img/welcome.png',
                       height: 200, width: 200),
                 ),
-                const Text(
-                  'Добро пожаловать !',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                Text(
+                  AppLocalizations.of(context).translate('welcome_title'),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 18),
                 ),
               ]),
         ),
@@ -61,8 +63,8 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Придумайте пароль:',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).translate('come_password'),
+                  style: const TextStyle(
                       color: Color.fromRGBO(111, 111, 111, 1),
                       fontSize: 18,
                       fontWeight: FontWeight.w500)),
@@ -104,8 +106,8 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
               padding: MaterialStateProperty.all(
                   const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
             ),
-            child: const Text('Далее',
-                style: TextStyle(
+            child: Text(AppLocalizations.of(context).translate('done'),
+                style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     color: Colors.white))),

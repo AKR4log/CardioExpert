@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,9 +57,10 @@ class _AccessState extends State<Access> {
                   child: Image.asset('assets/img/welcome.png',
                       height: 200, width: 200),
                 ),
-                const Text(
-                  'Добро пожаловать !',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                Text(
+                  AppLocalizations.of(context).translate('welcome_title'),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 18),
                 ),
               ]),
         ),
@@ -68,8 +70,8 @@ class _AccessState extends State<Access> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Повторите пароль:',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).translate('repeat_password'),
+                  style: const TextStyle(
                       color: Color.fromRGBO(111, 111, 111, 1),
                       fontSize: 18,
                       fontWeight: FontWeight.w500)),
@@ -107,7 +109,8 @@ class _AccessState extends State<Access> {
             : const SizedBox(),
         const SizedBox(height: 25),
         noAccess
-            ? const Text('Пароли не совпадают')
+            ? Text(
+                AppLocalizations.of(context).translate('passwords_dont_match'))
             : TextButton(
                 onPressed: () async {
                   var password = await getPassword();
@@ -145,8 +148,8 @@ class _AccessState extends State<Access> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Далее',
-                    style: TextStyle(
+                child: Text(AppLocalizations.of(context).translate('done'),
+                    style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
