@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -31,10 +32,10 @@ class _ControlMnoState extends State<ControlMno> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Контроль МНО при\nприёме Варфарина',
+        title: Text(
+          AppLocalizations.of(context).translate('control_INR'),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black),
         ),
         elevation: 0,
@@ -52,11 +53,12 @@ class _ControlMnoState extends State<ControlMno> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text('Сдали МНО, введите ваш показатель:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 13,
-                      )),
+                  child:
+                      Text(AppLocalizations.of(context).translate('passed_INR'),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13,
+                          )),
                 ),
                 TextField(
                   controller: controllerMno,
@@ -96,8 +98,9 @@ class _ControlMnoState extends State<ControlMno> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Сформировать отчёт',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context).translate('generate_report'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -122,8 +125,10 @@ class _ControlMnoState extends State<ControlMno> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Отправить отчёт врачу',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context)
+                        .translate('send_report_doctor'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -147,10 +152,9 @@ class _ControlMnoState extends State<ControlMno> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text(
-                    'Что такое МНО и почему так важно его контролировать',
+                child: Text(AppLocalizations.of(context).translate('what_INR'),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),

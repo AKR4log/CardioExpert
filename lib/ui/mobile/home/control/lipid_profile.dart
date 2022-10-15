@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -37,10 +38,10 @@ class _LipidProfileState extends State<LipidProfile> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Липидный профиль',
+        title: Text(
+          AppLocalizations.of(context).translate('lipid_profile'),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black),
         ),
         elevation: 0,
@@ -58,9 +59,9 @@ class _LipidProfileState extends State<LipidProfile> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text(
-                      'Сдали анализы, введите ваш показатель «Холестерин»:',
-                      style: TextStyle(
+                  child: Text(
+                      AppLocalizations.of(context).translate('cholesterol'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -94,9 +95,8 @@ class _LipidProfileState extends State<LipidProfile> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text(
-                      'Сдали анализы, введите ваш показатель «ЛПНП»:',
-                      style: TextStyle(
+                  child: Text(AppLocalizations.of(context).translate('ldl'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -130,9 +130,8 @@ class _LipidProfileState extends State<LipidProfile> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text(
-                      'Сдали анализы, введите ваш показатель «ЛПВП»:',
-                      style: TextStyle(
+                  child: Text(AppLocalizations.of(context).translate('hdl'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -166,9 +165,9 @@ class _LipidProfileState extends State<LipidProfile> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text(
-                      'Сдали анализы, введите ваш показатель «Триглицериды»:',
-                      style: TextStyle(
+                  child: Text(
+                      AppLocalizations.of(context).translate('triglycerides'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -215,8 +214,9 @@ class _LipidProfileState extends State<LipidProfile> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Сформировать отчёт',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context).translate('generate_report'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -246,8 +246,10 @@ class _LipidProfileState extends State<LipidProfile> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Отправить отчёт врачу',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context)
+                        .translate('send_report_doctor'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -271,10 +273,11 @@ class _LipidProfileState extends State<LipidProfile> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text(
-                    'Что такое липидный профиль и почему так важно его контролировать',
+                child: Text(
+                    AppLocalizations.of(context)
+                        .translate('what_lipid_profile'),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),

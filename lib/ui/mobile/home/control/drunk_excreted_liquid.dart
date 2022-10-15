@@ -1,3 +1,4 @@
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -45,10 +46,10 @@ class _ControlDrunkState extends State<ControlDrunk> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Контроль выпитой и\nвыделенной жидкости',
+        title: Text(
+          AppLocalizations.of(context).translate('control_drunk'),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black),
         ),
         elevation: 0,
@@ -100,9 +101,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выпито',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('drunk'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -138,9 +139,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выделено',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('highlighted'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -194,9 +195,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выпито',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('drunk'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -232,9 +233,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выделено',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('highlighted'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -288,9 +289,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выпито',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('drunk'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -326,9 +327,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выделено',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('highlighted'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -382,9 +383,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выпито',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('drunk'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -420,9 +421,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                       ),
                     ),
                     const SizedBox(width: 3),
-                    const Text(
-                      'Выделено',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).translate('highlighted'),
+                      style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: Color.fromRGBO(148, 148, 148, 1)),
@@ -451,9 +452,10 @@ class _ControlDrunkState extends State<ControlDrunk> {
                 padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
               ),
-              child: const Text('Почему это важно?',
+              child: Text(
+                  AppLocalizations.of(context).translate('why_important'),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: Colors.white))),
@@ -483,8 +485,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                 padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
               ),
-              child: const Text('Сформировать отчёт',
-                  style: TextStyle(
+              child: Text(
+                  AppLocalizations.of(context).translate('generate_report'),
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: Colors.white))),
@@ -518,8 +521,9 @@ class _ControlDrunkState extends State<ControlDrunk> {
                 padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
               ),
-              child: const Text('Отправить отчёт врачу',
-                  style: TextStyle(
+              child: Text(
+                  AppLocalizations.of(context).translate('send_report_doctor'),
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: Colors.white))),

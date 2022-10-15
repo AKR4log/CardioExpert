@@ -1,3 +1,4 @@
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,9 +19,9 @@ class _ReportsPageState extends State<ReportsPage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: const Text(
-          'Последние измерения',
-          style: TextStyle(color: Colors.black),
+        title: Text(
+          AppLocalizations.of(context).translate('recent_measurements'),
+          style: const TextStyle(color: Colors.black),
         ),
         leading: const BackButton(color: Colors.black),
       ),
@@ -29,15 +30,14 @@ class _ReportsPageState extends State<ReportsPage> {
         child: Center(
           child: Column(
             children: [
-              const Text(
-                  'Нажимая, вы отправляете в отчёте, все последние показатели в PDF файле. Это может занять, какое-то время..'),
+              Text(AppLocalizations.of(context).translate('confirmation')),
               TextButton(
                 onPressed: () {
                   cloud.ints();
                 },
-                child: const Text(
-                  'Отправить отчёт',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context).translate('send_report'),
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w600),

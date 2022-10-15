@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                   child: Center(
                       child: Text(
                     AppLocalizations.of(context).translate('self_control'),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: Colors.white),
@@ -76,10 +76,10 @@ class _HomePageState extends State<HomePage> {
                       color: !isLeft
                           ? const Color.fromRGBO(255, 98, 98, 1)
                           : const Color.fromRGBO(148, 148, 148, 1)),
-                  child: const Center(
+                  child: Center(
                       child: Text(
-                    'Мои препараты',
-                    style: TextStyle(
+                    AppLocalizations.of(context).translate('my_medications'),
+                    style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: Colors.white),
@@ -120,10 +120,12 @@ class _HomePageState extends State<HomePage> {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                                 flex: 2,
-                                child: Text('Контроль веса\nИндекса массы тела',
-                                    style: TextStyle(
+                                child: Text(
+                                    AppLocalizations.of(context).translate(
+                                        'weight_control_body_mass_index'),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black))),
                             Flexible(
@@ -159,10 +161,12 @@ class _HomePageState extends State<HomePage> {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                                 flex: 2,
-                                child: Text('Контроль артериального давления',
-                                    style: TextStyle(
+                                child: Text(
+                                    AppLocalizations.of(context)
+                                        .translate('blood_pressure_monitoring'),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black))),
                             Flexible(
@@ -198,10 +202,12 @@ class _HomePageState extends State<HomePage> {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                                 flex: 2,
-                                child: Text('Контроль пульса',
-                                    style: TextStyle(
+                                child: Text(
+                                    AppLocalizations.of(context)
+                                        .translate('pulse_monitoring'),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black))),
                             Flexible(
@@ -237,11 +243,12 @@ class _HomePageState extends State<HomePage> {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                                 flex: 2,
                                 child: Text(
-                                    'Контроль выпитой и выделенной жидкости',
-                                    style: TextStyle(
+                                    AppLocalizations.of(context)
+                                        .translate('control_drunk'),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black))),
                             Flexible(
@@ -277,10 +284,12 @@ class _HomePageState extends State<HomePage> {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                                 flex: 2,
-                                child: Text('Контроль МНО при приёме Варфарина',
-                                    style: TextStyle(
+                                child: Text(
+                                    AppLocalizations.of(context)
+                                        .translate('control_INR'),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black))),
                             Flexible(
@@ -316,10 +325,12 @@ class _HomePageState extends State<HomePage> {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                                 flex: 2,
-                                child: Text('Липидный профиль',
-                                    style: TextStyle(
+                                child: Text(
+                                    AppLocalizations.of(context)
+                                        .translate('lipid_profile'),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black))),
                             Flexible(
@@ -350,8 +361,9 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const ReportsPage())),
-                      child: const Text('Отчёты',
-                          style: TextStyle(
+                      child: Text(
+                          AppLocalizations.of(context).translate('reports'),
+                          style: const TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     ),
@@ -379,16 +391,19 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const HelperPage())),
-                      child: const Text('Информационные материалы',
-                          style: TextStyle(
+                      child: Text(
+                          AppLocalizations.of(context)
+                              .translate('informational_materials'),
+                          style: const TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     ),
                   ),
                   TextButton(
                       onPressed: () => FirebaseAuth.instance.signOut(),
-                      child: const Text('Выйти из аккаунта',
-                          style: TextStyle(
+                      child: Text(
+                          AppLocalizations.of(context).translate('log_out'),
+                          style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
                               color: Colors.blue))),
@@ -557,8 +572,8 @@ class _HomePageState extends State<HomePage> {
                             const EdgeInsets.symmetric(
                                 vertical: 14, horizontal: 28)),
                       ),
-                      child: const Text('Добавить',
-                          style: TextStyle(
+                      child: Text(AppLocalizations.of(context).translate('add'),
+                          style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
                               color: Colors.white))),

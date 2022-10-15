@@ -1,3 +1,4 @@
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:provider/provider.dart';
@@ -70,10 +71,10 @@ class _AddTabletState extends State<AddTablet> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: const BackButton(color: Colors.white),
-        title: const Text(
-          'Добавить препарат',
+        title: Text(
+          AppLocalizations.of(context).translate('add'),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.w600, fontSize: 15, color: Colors.white),
         ),
         elevation: 0,
@@ -91,11 +92,12 @@ class _AddTabletState extends State<AddTablet> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text('Название препарата:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 13,
-                      )),
+                  child:
+                      Text(AppLocalizations.of(context).translate('name_drug'),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13,
+                          )),
                 ),
                 TextField(
                   controller: controllerName,
@@ -103,15 +105,16 @@ class _AddTabletState extends State<AddTablet> {
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.black),
-                  decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    hintText: 'Препарат...',
-                    hintStyle: TextStyle(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    hintText:
+                        AppLocalizations.of(context).translate('medication'),
+                    hintStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
                         color: Colors.black54),
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Color.fromRGBO(229, 231, 235, 1))),
                   ),
@@ -126,8 +129,9 @@ class _AddTabletState extends State<AddTablet> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text('Дозировка препарата:',
-                      style: TextStyle(
+                  child: Text(
+                      AppLocalizations.of(context).translate('dosage_drug'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -169,7 +173,8 @@ class _AddTabletState extends State<AddTablet> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Период приёма')),
+                child: Text(AppLocalizations.of(context)
+                    .translate('admission_period'))),
           ),
           Row(
             children: [
@@ -205,9 +210,9 @@ class _AddTabletState extends State<AddTablet> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Сколько раз в день (приём):',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context).translate('how_many_times_day'),
+                style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 13,
                     color: Colors.black),
@@ -269,9 +274,10 @@ class _AddTabletState extends State<AddTablet> {
                 numb == "1"
                     ? Column(
                         children: [
-                          const Text(
-                            'Время 1 приёма',
-                            style: TextStyle(
+                          Text(
+                            AppLocalizations.of(context)
+                                .translate('time_1_reception'),
+                            style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),
@@ -304,9 +310,10 @@ class _AddTabletState extends State<AddTablet> {
                             children: [
                               Column(
                                 children: [
-                                  const Text(
-                                    'Время 1 приёма',
-                                    style: TextStyle(
+                                  Text(
+                                    AppLocalizations.of(context)
+                                        .translate('time_1_reception'),
+                                    style: const TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
@@ -338,9 +345,10 @@ class _AddTabletState extends State<AddTablet> {
                               ),
                               Column(
                                 children: [
-                                  const Text(
-                                    'Время 2 приёма',
-                                    style: TextStyle(
+                                  Text(
+                                    AppLocalizations.of(context)
+                                        .translate('time_2_sessions'),
+                                    style: const TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
@@ -377,9 +385,10 @@ class _AddTabletState extends State<AddTablet> {
                                 children: [
                                   Column(
                                     children: [
-                                      const Text(
-                                        'Время 1 приёма',
-                                        style: TextStyle(
+                                      Text(
+                                        AppLocalizations.of(context)
+                                            .translate('time_1_reception'),
+                                        style: const TextStyle(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black),
@@ -413,9 +422,10 @@ class _AddTabletState extends State<AddTablet> {
                                   ),
                                   Column(
                                     children: [
-                                      const Text(
-                                        'Время 2 приёма',
-                                        style: TextStyle(
+                                      Text(
+                                        AppLocalizations.of(context)
+                                            .translate('time_2_sessions'),
+                                        style: const TextStyle(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black),
@@ -449,9 +459,10 @@ class _AddTabletState extends State<AddTablet> {
                                   ),
                                   Column(
                                     children: [
-                                      const Text(
-                                        'Время 3 приёма',
-                                        style: TextStyle(
+                                      Text(
+                                        AppLocalizations.of(context)
+                                            .translate('time_3_appointments'),
+                                        style: const TextStyle(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black),
@@ -510,8 +521,8 @@ class _AddTabletState extends State<AddTablet> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 28)),
                 ),
-                child: const Text('Добавить',
-                    style: TextStyle(
+                child: Text(AppLocalizations.of(context).translate('add'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
