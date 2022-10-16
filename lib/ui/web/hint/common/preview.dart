@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/models/hint.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 
 import 'detail.dart';
@@ -34,9 +35,9 @@ class _PreviewHintState extends State<PreviewHint> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Подсказка',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context).translate('hint'),
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),

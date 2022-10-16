@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/models/hint.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/web/hint/common/list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,7 @@ class _HintPageState extends State<HintPage> {
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 3,
-                      child: const Text("CardioExpert подсказки",
+                      child: const Text("CardioExpert Hints",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 38, fontWeight: FontWeight.bold)),
@@ -57,7 +58,8 @@ class _HintPageState extends State<HintPage> {
                                   builder: (BuildContext context) =>
                                       const HomePageWeb()));
                             },
-                            child: const Text('На главную')),
+                            child: Text(AppLocalizations.of(context)
+                                .translate('to_main_page'))),
                         TextButton(
                             onPressed: () {
                               showDialog(
@@ -65,16 +67,19 @@ class _HintPageState extends State<HintPage> {
                                 barrierDismissible: false,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text('Создание v2 доски'),
+                                    title: Text(AppLocalizations.of(context)
+                                        .translate('creating_v2_board')),
                                     content: SingleChildScrollView(
                                       child: ListBody(
                                         children: <Widget>[
                                           Container(
                                             margin: const EdgeInsets.only(
                                                 bottom: 4),
-                                            child: const Text(
-                                                'Введите название доски:',
-                                                style: TextStyle(
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .translate(
+                                                        'enter_name_board'),
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 13,
                                                 )),
@@ -85,18 +90,20 @@ class _HintPageState extends State<HintPage> {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 15,
                                                 color: Colors.black),
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               contentPadding:
-                                                  EdgeInsets.symmetric(
+                                                  const EdgeInsets.symmetric(
                                                       vertical: 10,
                                                       horizontal: 15),
                                               hintText:
-                                                  'Зачем нужен Липидный Профиль?',
-                                              hintStyle: TextStyle(
+                                                  AppLocalizations.of(context)
+                                                      .translate(
+                                                          'why_lipid_profile'),
+                                              hintStyle: const TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 15,
                                                   color: Colors.black54),
-                                              border: OutlineInputBorder(
+                                              border: const OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Color.fromRGBO(
                                                           229, 231, 235, 1))),
@@ -106,9 +113,11 @@ class _HintPageState extends State<HintPage> {
                                           Container(
                                             margin: const EdgeInsets.only(
                                                 bottom: 4),
-                                            child: const Text(
-                                                'Введите описание доски:',
-                                                style: TextStyle(
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .translate(
+                                                        'enter_description_board'),
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 13,
                                                 )),
@@ -119,18 +128,20 @@ class _HintPageState extends State<HintPage> {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 15,
                                                 color: Colors.black),
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               contentPadding:
-                                                  EdgeInsets.symmetric(
+                                                  const EdgeInsets.symmetric(
                                                       vertical: 10,
                                                       horizontal: 15),
-                                              hintText:
-                                                  'Липидный Профиль позволяет...',
-                                              hintStyle: TextStyle(
+                                              hintText: AppLocalizations.of(
+                                                      context)
+                                                  .translate(
+                                                      'lipid_profile_allows'),
+                                              hintStyle: const TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 15,
                                                   color: Colors.black54),
-                                              border: OutlineInputBorder(
+                                              border: const OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Color.fromRGBO(
                                                           229, 231, 235, 1))),
@@ -142,7 +153,8 @@ class _HintPageState extends State<HintPage> {
                                     actions: <Widget>[
                                       TextButton(
                                         child: Text(
-                                          'Отменить',
+                                          AppLocalizations.of(context)
+                                              .translate('cancel'),
                                           style:
                                               TextStyle(color: Colors.red[400]),
                                         ),
@@ -151,7 +163,8 @@ class _HintPageState extends State<HintPage> {
                                         },
                                       ),
                                       TextButton(
-                                        child: const Text('Создать'),
+                                        child: Text(AppLocalizations.of(context)
+                                            .translate('done')),
                                         onPressed: () {
                                           cloud
                                               .createHint(
@@ -169,7 +182,8 @@ class _HintPageState extends State<HintPage> {
                                 },
                               );
                             },
-                            child: const Text('Создать подсказку')),
+                            child: Text(AppLocalizations.of(context)
+                                .translate('create_hint'))),
                       ],
                     ),
                   ],

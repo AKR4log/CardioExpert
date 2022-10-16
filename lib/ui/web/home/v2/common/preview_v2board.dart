@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/models/v2board.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 
 import 'detail.dart';
@@ -35,9 +36,9 @@ class _PreviewV2BoardState extends State<PreviewV2Board> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Доска V2',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context).translate('board_v2'),
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),

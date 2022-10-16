@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -31,10 +32,10 @@ class _ControlPulseState extends State<ControlPulse> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Контроль пульса',
+        title: Text(
+          AppLocalizations.of(context).translate('pulse_monitoring'),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black),
         ),
         elevation: 0,
@@ -52,8 +53,10 @@ class _ControlPulseState extends State<ControlPulse> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text('Введите ваш пульс:',
-                      style: TextStyle(
+                  child: Text(
+                      AppLocalizations.of(context)
+                          .translate('enter_your_heart_rate'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -98,9 +101,10 @@ class _ControlPulseState extends State<ControlPulse> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Как правильно измерять пульс',
+                child: Text(
+                    AppLocalizations.of(context).translate('how_measure_pulse'),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -123,10 +127,10 @@ class _ControlPulseState extends State<ControlPulse> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text(
-                    'Что такое пульс и почему так важно его контролировать',
+                child: Text(
+                    AppLocalizations.of(context).translate('what_pulse'),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -148,8 +152,9 @@ class _ControlPulseState extends State<ControlPulse> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Сформировать отчёт',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context).translate('generate_report'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -174,8 +179,10 @@ class _ControlPulseState extends State<ControlPulse> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Отправить отчёт врачу',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context)
+                        .translate('send_report_doctor'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),

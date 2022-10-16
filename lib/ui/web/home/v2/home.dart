@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/models/v2board.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/web/home/home.dart';
 import 'package:cardio_expert/ui/web/home/v2/common/list_v2board.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,8 @@ class _HomeV2State extends State<HomeV2> {
                                   builder: (BuildContext context) =>
                                       const HomePageWeb()));
                             },
-                            child: const Text('На главную')),
+                            child: Text(AppLocalizations.of(context)
+                                .translate('to_main_page'))),
                         TextButton(
                             onPressed: () {
                               showDialog(
@@ -67,16 +69,19 @@ class _HomeV2State extends State<HomeV2> {
                                 barrierDismissible: false,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text('Создание v2 доски'),
+                                    title: Text(AppLocalizations.of(context)
+                                        .translate('creating_v2_board')),
                                     content: SingleChildScrollView(
                                       child: ListBody(
                                         children: <Widget>[
                                           Container(
                                             margin: const EdgeInsets.only(
                                                 bottom: 4),
-                                            child: const Text(
-                                                'Введите название доски:',
-                                                style: TextStyle(
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .translate(
+                                                        'enter_name_board'),
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 13,
                                                 )),
@@ -87,18 +92,20 @@ class _HomeV2State extends State<HomeV2> {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 15,
                                                 color: Colors.black),
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               contentPadding:
-                                                  EdgeInsets.symmetric(
+                                                  const EdgeInsets.symmetric(
                                                       vertical: 10,
                                                       horizontal: 15),
-                                              hintText:
-                                                  'Зачем нужен Липидный Профиль?',
-                                              hintStyle: TextStyle(
+                                              hintText: AppLocalizations.of(
+                                                      context)
+                                                  .translate(
+                                                      'lipid_profile_allows'),
+                                              hintStyle: const TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 15,
                                                   color: Colors.black54),
-                                              border: OutlineInputBorder(
+                                              border: const OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Color.fromRGBO(
                                                           229, 231, 235, 1))),
@@ -108,9 +115,11 @@ class _HomeV2State extends State<HomeV2> {
                                           Container(
                                             margin: const EdgeInsets.only(
                                                 bottom: 4),
-                                            child: const Text(
-                                                'Введите описание доски:',
-                                                style: TextStyle(
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .translate(
+                                                        'enter_description_board'),
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 13,
                                                 )),
@@ -121,18 +130,20 @@ class _HomeV2State extends State<HomeV2> {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 15,
                                                 color: Colors.black),
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               contentPadding:
-                                                  EdgeInsets.symmetric(
+                                                  const EdgeInsets.symmetric(
                                                       vertical: 10,
                                                       horizontal: 15),
-                                              hintText:
-                                                  'Липидный Профиль позволяет...',
-                                              hintStyle: TextStyle(
+                                              hintText: AppLocalizations.of(
+                                                      context)
+                                                  .translate(
+                                                      'lipid_profile_allows'),
+                                              hintStyle: const TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 15,
                                                   color: Colors.black54),
-                                              border: OutlineInputBorder(
+                                              border: const OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Color.fromRGBO(
                                                           229, 231, 235, 1))),
@@ -144,7 +155,8 @@ class _HomeV2State extends State<HomeV2> {
                                     actions: <Widget>[
                                       TextButton(
                                         child: Text(
-                                          'Отменить',
+                                          AppLocalizations.of(context)
+                                              .translate('cancel'),
                                           style:
                                               TextStyle(color: Colors.red[400]),
                                         ),
@@ -153,7 +165,8 @@ class _HomeV2State extends State<HomeV2> {
                                         },
                                       ),
                                       TextButton(
-                                        child: const Text('Создать'),
+                                        child: Text(AppLocalizations.of(context)
+                                            .translate('to_create')),
                                         onPressed: () {
                                           cloud
                                               .createV2Board(
@@ -172,7 +185,8 @@ class _HomeV2State extends State<HomeV2> {
                                 },
                               );
                             },
-                            child: Text('Создать v2 доску')),
+                            child: Text(AppLocalizations.of(context)
+                                .translate('creating_v2_board'))),
                       ],
                     ),
                   ],

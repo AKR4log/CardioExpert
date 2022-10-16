@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/database/service.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/mobile/home/action/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
@@ -35,10 +36,11 @@ class _ControlWeightState extends State<ControlWeight> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Контроль веса\nИндекса массы тела',
+        title: Text(
+          AppLocalizations.of(context)
+              .translate('weight_control_body_mass_index'),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black),
         ),
         elevation: 0,
@@ -56,8 +58,9 @@ class _ControlWeightState extends State<ControlWeight> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text('Введите вес (в килограммах):',
-                      style: TextStyle(
+                  child: Text(
+                      AppLocalizations.of(context).translate('enter_weight'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -100,8 +103,9 @@ class _ControlWeightState extends State<ControlWeight> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 7),
-                  child: const Text('Введите рост (в метрах):',
-                      style: TextStyle(
+                  child: Text(
+                      AppLocalizations.of(context).translate('enter_height'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                       )),
@@ -142,10 +146,10 @@ class _ControlWeightState extends State<ControlWeight> {
             margin: const EdgeInsets.symmetric(vertical: 34),
             child: Center(
               child: Column(children: [
-                const Text(
-                  'Ваш индекс массы\nтела составил:',
+                Text(
+                  AppLocalizations.of(context).translate('your_mass_index'),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 17,
                       color: Colors.black),
@@ -181,8 +185,9 @@ class _ControlWeightState extends State<ControlWeight> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Сформировать отчёт',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context).translate('generate_report'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -208,8 +213,10 @@ class _ControlWeightState extends State<ControlWeight> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Отправить отчёт врачу',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context)
+                        .translate('send_report_doctor'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),
@@ -232,8 +239,9 @@ class _ControlWeightState extends State<ControlWeight> {
                   padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 14, horizontal: 55)),
                 ),
-                child: const Text('Что это означает?',
-                    style: TextStyle(
+                child: Text(
+                    AppLocalizations.of(context).translate('what_does_mean'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.white))),

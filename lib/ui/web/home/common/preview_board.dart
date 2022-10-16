@@ -1,4 +1,5 @@
 import 'package:cardio_expert/app/models/board.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../v2/home.dart';
@@ -34,9 +35,9 @@ class _PreviewBoardState extends State<PreviewBoard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Доска',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context).translate('board'),
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),

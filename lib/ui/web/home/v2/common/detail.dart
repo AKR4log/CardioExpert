@@ -1,6 +1,7 @@
 // ignore_for_file: missing_return
 
 import 'package:cardio_expert/app/models/v2board.dart';
+import 'package:cardio_expert/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -64,7 +65,8 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                       builder: (BuildContext context) =>
                                           const HomePageWeb()));
                                 },
-                                child: const Text('На главную')),
+                                child: Text(AppLocalizations.of(context)
+                                    .translate('to_main_page'))),
                             TextButton(
                                 onPressed: () {
                                   showDialog(
@@ -72,17 +74,19 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                     barrierDismissible: false,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: const Text(
-                                            'Редактирование подсказки'),
+                                        title: Text(AppLocalizations.of(context)
+                                            .translate('editing_hint')),
                                         content: SingleChildScrollView(
                                           child: ListBody(
                                             children: <Widget>[
                                               Container(
                                                 margin: const EdgeInsets.only(
                                                     bottom: 4),
-                                                child: const Text(
-                                                    'Введите новое название подсказки:',
-                                                    style: TextStyle(
+                                                child: Text(
+                                                    AppLocalizations.of(context)
+                                                        .translate(
+                                                            'enter_new_name_for_hint'),
+                                                    style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontSize: 13,
@@ -94,35 +98,42 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 15,
                                                     color: Colors.black),
-                                                decoration:
-                                                    const InputDecoration(
+                                                decoration: InputDecoration(
                                                   contentPadding:
-                                                      EdgeInsets.symmetric(
+                                                      const EdgeInsets
+                                                              .symmetric(
                                                           vertical: 10,
                                                           horizontal: 15),
-                                                  hintText:
-                                                      'Зачем нужен Липидный Профиль?',
-                                                  hintStyle: TextStyle(
+                                                  hintText: AppLocalizations.of(
+                                                          context)
+                                                      .translate(
+                                                          'why_lipid_profile'),
+                                                  hintStyle: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 15,
                                                       color: Colors.black54),
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Color.fromRGBO(
-                                                              229,
-                                                              231,
-                                                              235,
-                                                              1))),
+                                                  border:
+                                                      const OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          229,
+                                                                          231,
+                                                                          235,
+                                                                          1))),
                                                 ),
                                               ),
                                               const SizedBox(height: 15),
                                               Container(
                                                 margin: const EdgeInsets.only(
                                                     bottom: 4),
-                                                child: const Text(
-                                                    'Введите новое описание подсказки:',
-                                                    style: TextStyle(
+                                                child: Text(
+                                                    AppLocalizations.of(context)
+                                                        .translate(
+                                                            'enter_new_description_for_hint'),
+                                                    style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontSize: 13,
@@ -135,26 +146,31 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 15,
                                                     color: Colors.black),
-                                                decoration:
-                                                    const InputDecoration(
+                                                decoration: InputDecoration(
                                                   contentPadding:
-                                                      EdgeInsets.symmetric(
+                                                      const EdgeInsets
+                                                              .symmetric(
                                                           vertical: 10,
                                                           horizontal: 15),
-                                                  hintText:
-                                                      'Липидный Профиль позволяет...',
-                                                  hintStyle: TextStyle(
+                                                  hintText: AppLocalizations.of(
+                                                          context)
+                                                      .translate(
+                                                          'lipid_profile_allows'),
+                                                  hintStyle: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 15,
                                                       color: Colors.black54),
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Color.fromRGBO(
-                                                              229,
-                                                              231,
-                                                              235,
-                                                              1))),
+                                                  border:
+                                                      const OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          229,
+                                                                          231,
+                                                                          235,
+                                                                          1))),
                                                 ),
                                               ),
                                             ],
@@ -163,7 +179,8 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                         actions: <Widget>[
                                           TextButton(
                                             child: Text(
-                                              'Отменить',
+                                              AppLocalizations.of(context)
+                                                  .translate('cancel'),
                                               style: TextStyle(
                                                   color: Colors.red[400]),
                                             ),
@@ -172,7 +189,9 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                             },
                                           ),
                                           TextButton(
-                                            child: const Text('Готово'),
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .translate('done')),
                                             onPressed: () {
                                               cloud
                                                   .updateV2Board(
@@ -193,7 +212,8 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                     },
                                   );
                                 },
-                                child: const Text('Редактировать')),
+                                child: Text(AppLocalizations.of(context)
+                                    .translate('edit'))),
                           ],
                         ),
                       ],
@@ -215,14 +235,14 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Название: ${board.name}",
+                                    "${AppLocalizations.of(context).translate('title')}: ${board.name}",
                                     style: const TextStyle(
                                         fontSize: 26,
                                         fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(height: 15),
                                   Text(
-                                    "Описание: ${board.description}",
+                                    "${AppLocalizations.of(context).translate('description')}: ${board.description}",
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),
