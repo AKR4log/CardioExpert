@@ -12,8 +12,10 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  Locale locale;
   @override
   Widget build(BuildContext context) {
+    debugPrint(locale.countryCode.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

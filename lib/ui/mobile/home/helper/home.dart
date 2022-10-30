@@ -27,11 +27,11 @@ class _HelperPageState extends State<HelperPage> {
         leading: const BackButton(color: Colors.black),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-          child: SizedBox(
-            width: 350,
-            height: MediaQuery.of(context).size.height,
+        child: SizedBox(
+          width: 350,
+          height: MediaQuery.of(context).size.height,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 85),
             child: StreamProvider<List<Board>>.value(
               value: MainStateMobile().getAllBoards,
               initialData: const [],

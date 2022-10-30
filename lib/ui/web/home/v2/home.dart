@@ -20,11 +20,15 @@ class HomeV2 extends StatefulWidget {
 class _HomeV2State extends State<HomeV2> {
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerDescription = TextEditingController();
+  TextEditingController controllerNameKZ = TextEditingController();
+  TextEditingController controllerDescriptionKZ = TextEditingController();
 
   @override
   void initState() {
     controllerDescription = TextEditingController();
     controllerName = TextEditingController();
+    controllerDescriptionKZ = TextEditingController();
+    controllerNameKZ = TextEditingController();
     super.initState();
   }
 
@@ -47,7 +51,7 @@ class _HomeV2State extends State<HomeV2> {
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 3,
-                      child: Text(widget.name,
+                      child: Text(widget.name ?? "Атауы жоқ",
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               fontSize: 38, fontWeight: FontWeight.bold)),
@@ -87,7 +91,7 @@ class _HomeV2State extends State<HomeV2> {
                                                 )),
                                           ),
                                           TextField(
-                                            controller: controllerName,
+                                            controller: controllerNameKZ,
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 15,
@@ -111,6 +115,39 @@ class _HomeV2State extends State<HomeV2> {
                                                           229, 231, 235, 1))),
                                             ),
                                           ),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 4),
+                                            child: const Text(
+                                                "Введите название доски на русском",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 13,
+                                                )),
+                                          ),
+                                          TextField(
+                                            controller: controllerName,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15,
+                                                color: Colors.black),
+                                            decoration: const InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 15),
+                                              hintText:
+                                                  "Липидный Профиль позволяет...",
+                                              hintStyle: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                  color: Colors.black54),
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Color.fromRGBO(
+                                                          229, 231, 235, 1))),
+                                            ),
+                                          ),
                                           const SizedBox(height: 15),
                                           Container(
                                             margin: const EdgeInsets.only(
@@ -125,7 +162,7 @@ class _HomeV2State extends State<HomeV2> {
                                                 )),
                                           ),
                                           TextField(
-                                            controller: controllerDescription,
+                                            controller: controllerDescriptionKZ,
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 15,
@@ -144,6 +181,39 @@ class _HomeV2State extends State<HomeV2> {
                                                   fontSize: 15,
                                                   color: Colors.black54),
                                               border: const OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Color.fromRGBO(
+                                                          229, 231, 235, 1))),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 4),
+                                            child: const Text(
+                                                "Введите описание доски на русском",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 13,
+                                                )),
+                                          ),
+                                          TextField(
+                                            controller: controllerDescription,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15,
+                                                color: Colors.black),
+                                            decoration: const InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 15),
+                                              hintText:
+                                                  "Липидный Профиль позволяет...",
+                                              hintStyle: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                  color: Colors.black54),
+                                              border: OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Color.fromRGBO(
                                                           229, 231, 235, 1))),
@@ -173,7 +243,10 @@ class _HomeV2State extends State<HomeV2> {
                                                   context,
                                                   widget.uidBoard,
                                                   controllerName.text.trim(),
+                                                  controllerNameKZ.text.trim(),
                                                   controllerDescription.text
+                                                      .trim(),
+                                                  controllerDescriptionKZ.text
                                                       .trim())
                                               .whenComplete(() {
                                             Navigator.of(context).pop();
@@ -210,6 +283,8 @@ class _HomeV2State extends State<HomeV2> {
   void dispose() {
     controllerDescription?.dispose();
     controllerName?.dispose();
+    controllerDescriptionKZ?.dispose();
+    controllerNameKZ?.dispose();
     super.dispose();
   }
 }

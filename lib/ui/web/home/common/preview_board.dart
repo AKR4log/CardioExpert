@@ -20,8 +20,8 @@ class _PreviewBoardState extends State<PreviewBoard> {
       child: TextButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  HomeV2(uidBoard: widget.board.uid, name: widget.board.name)));
+              builder: (BuildContext context) => HomeV2(
+                  uidBoard: widget.board.uid, name: widget.board.name_kz)));
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -44,7 +44,7 @@ class _PreviewBoardState extends State<PreviewBoard> {
             ),
             const SizedBox(height: 2),
             Text(
-              widget.board.name,
+              widget.board.name_kz ?? "Атауы жоқ",
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,

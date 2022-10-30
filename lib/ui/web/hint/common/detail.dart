@@ -228,14 +228,14 @@ class _DetailHintState extends State<DetailHint> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${AppLocalizations.of(context).translate('title')}: ${hint.name}",
+                                    "${AppLocalizations.of(context).translate('title')}: ${hint.name_kz ?? "Атауы жоқ"}",
                                     style: const TextStyle(
                                         fontSize: 26,
                                         fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(height: 15),
                                   Text(
-                                    "${AppLocalizations.of(context).translate('description')}: ${hint.description}",
+                                    "${AppLocalizations.of(context).translate('description')}: ${hint.description_kz ?? "Сипаттама жоқ"}",
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),

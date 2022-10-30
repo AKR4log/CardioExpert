@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'package:cardio_expert/localization.dart';
+import 'package:cardio_expert/main.dart';
 import 'package:cardio_expert/ui/mobile/home/action/tablet.dart';
 import 'package:cardio_expert/ui/mobile/home/control/Blood_pressure.dart';
 import 'package:cardio_expert/ui/mobile/home/control/drunk_excreted_liquid.dart';
@@ -27,63 +28,70 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
           child: Column(children: [
         Container(
-          margin: const EdgeInsets.only(top: 76, bottom: 30),
-          child: Row(
+          margin:
+              const EdgeInsets.only(top: 76, bottom: 30, left: 20, right: 20),
+          child: Flex(
+            direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isLeft = true;
-                  });
-                },
-                child: Container(
-                  height: 33,
-                  padding: const EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.horizontal(
-                          left: Radius.circular(10)),
-                      color: isLeft
-                          ? const Color.fromRGBO(255, 98, 98, 1)
-                          : const Color.fromRGBO(148, 148, 148, 1)),
-                  child: Center(
-                      child: Text(
-                    AppLocalizations.of(context).translate('self_control'),
-                    style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  )),
+              Flexible(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isLeft = false;
+                    });
+                  },
+                  child: Container(
+                    height: 33,
+                    padding: const EdgeInsets.symmetric(horizontal: 22),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: !isLeft
+                            ? const Color.fromRGBO(255, 98, 98, 1)
+                            : const Color.fromRGBO(148, 148, 148, 1)),
+                    child: Center(
+                        child: Text(
+                      AppLocalizations.of(context).translate('my_medications'),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    )),
+                  ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isLeft = false;
-                  });
-                },
-                child: Container(
-                  height: 33,
-                  padding: const EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.horizontal(
-                          right: Radius.circular(10)),
-                      color: !isLeft
-                          ? const Color.fromRGBO(255, 98, 98, 1)
-                          : const Color.fromRGBO(148, 148, 148, 1)),
-                  child: Center(
-                      child: Text(
-                    AppLocalizations.of(context).translate('my_medications'),
-                    style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  )),
+              Flexible(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isLeft = true;
+                    });
+                  },
+                  child: Container(
+                    height: 33,
+                    padding: const EdgeInsets.symmetric(horizontal: 22),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: isLeft
+                            ? const Color.fromRGBO(255, 98, 98, 1)
+                            : const Color.fromRGBO(148, 148, 148, 1)),
+                    child: Center(
+                        child: Text(
+                      AppLocalizations.of(context).translate('self_control'),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    )),
+                  ),
                 ),
               )
             ],
@@ -399,6 +407,27 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.black)),
                     ),
                   ),
+                  myLocale.countryCode.toString() != "KZ"
+                      ? TextButton(
+                          onPressed: () {
+                            Locale newLocale = const Locale('kk', 'KZ');
+                            MyApp.setLocale(context, newLocale);
+                          },
+                          child: const Text("Қазақшаға көш",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.blue)))
+                      : TextButton(
+                          onPressed: () {
+                            Locale newLocale = const Locale('ru', 'RU');
+                            MyApp.setLocale(context, newLocale);
+                          },
+                          child: const Text("Переключить на русский",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.blue))),
                   TextButton(
                       onPressed: () => FirebaseAuth.instance.signOut(),
                       child: Text(

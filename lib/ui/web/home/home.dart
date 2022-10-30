@@ -17,10 +17,13 @@ class HomePageWeb extends StatefulWidget {
 
 class _HomePageWebState extends State<HomePageWeb> {
   TextEditingController controllerNameBoard = TextEditingController();
+  TextEditingController controllerNameKZBoard = TextEditingController();
+  Locale locale;
 
   @override
   void initState() {
     controllerNameBoard = TextEditingController();
+    controllerNameKZBoard = TextEditingController();
     super.initState();
   }
 
@@ -80,7 +83,7 @@ class _HomePageWebState extends State<HomePageWeb> {
                                                   )),
                                             ),
                                             TextField(
-                                              controller: controllerNameBoard,
+                                              controller: controllerNameKZBoard,
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 15,
@@ -93,6 +96,43 @@ class _HomePageWebState extends State<HomePageWeb> {
                                                 hintText: AppLocalizations.of(
                                                         context)
                                                     .translate('lipid_profile'),
+                                                hintStyle: const TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 15,
+                                                    color: Colors.black54),
+                                                border:
+                                                    const OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    229,
+                                                                    231,
+                                                                    235,
+                                                                    1))),
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 4),
+                                              child: Text(
+                                                  "Введите название доски на русском",
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 13,
+                                                  )),
+                                            ),
+                                            TextField(
+                                              controller: controllerNameBoard,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 15,
+                                                  color: Colors.black),
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10,
+                                                        horizontal: 15),
+                                                hintText: "Липидный профиль",
                                                 hintStyle: const TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 15,
@@ -132,6 +172,8 @@ class _HomePageWebState extends State<HomePageWeb> {
                                                 .createBoard(
                                                     context,
                                                     controllerNameBoard.text
+                                                        .trim(),
+                                                    controllerNameKZBoard.text
                                                         .trim())
                                                 .whenComplete(() {
                                               Navigator.of(context).pop();
@@ -167,6 +209,7 @@ class _HomePageWebState extends State<HomePageWeb> {
   @override
   void dispose() {
     controllerNameBoard?.dispose();
+    controllerNameKZBoard?.dispose();
     super.dispose();
   }
 }

@@ -382,21 +382,28 @@ class Cloud extends AppStateMobile {
     }
   }
 
-  Future<String> createBoard(BuildContext context, String name) async {
+  Future<String> createBoard(
+      BuildContext context, String name, String name_kz) async {
     await Firebase.initializeApp();
     try {
       final DateTime now = DateTime.now();
       final DateFormat formatter = DateFormat('yyyy-MM-dd');
       final String formatted = formatter.format(now);
       var uid = const Uuid().v4();
-      refB.doc(uid).set({'name': name, 'uid': uid, 'date': formatted});
+      refB.doc(uid).set(
+          {'name': name, 'name_kz': name_kz, 'uid': uid, 'date': formatted});
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  Future<String> createV2Board(BuildContext context, String fatherUid,
-      String name, String description) async {
+  Future<String> createV2Board(
+      BuildContext context,
+      String fatherUid,
+      String name,
+      String name_kz,
+      String description,
+      String description_kz) async {
     await Firebase.initializeApp();
     try {
       final DateTime now = DateTime.now();
@@ -406,6 +413,8 @@ class Cloud extends AppStateMobile {
       refB.doc(fatherUid).collection('v2board').doc(uid).set({
         'name': name,
         'description': description,
+        'name_kz': name_kz,
+        'description_kz': description_kz,
         'father': fatherUid,
         'uid': uid,
         'date': formatted

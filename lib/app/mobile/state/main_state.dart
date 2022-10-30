@@ -68,6 +68,7 @@ class MainStateMobile extends AppStateMobile {
       return Board(
         uid: doc.get('uid'),
         name: doc.get('name'),
+        name_kz: doc.get('name_kz'),
         date: doc.get('date'),
       );
     }).toList();
@@ -83,8 +84,10 @@ class MainStateMobile extends AppStateMobile {
       return V2Board(
         uid: doc.get('uid'),
         name: doc.get('name'),
+        name_kz: doc.get('name_kz'),
         date: doc.get('date'),
         description: doc.get('description'),
+        description_kz: doc.get('description_kz'),
         father: doc.get('father'),
       );
     }).toList();
@@ -103,7 +106,9 @@ class MainStateMobile extends AppStateMobile {
     return V2Board(
         uid: snapshot.get('uid'),
         name: snapshot.get('name'),
+        name_kz: snapshot.get('name_kz'),
         description: snapshot.get('description'),
+        description_kz: snapshot.get('description_kz'),
         father: snapshot.get('father'),
         date: snapshot.get('date'));
   }
@@ -123,7 +128,9 @@ class MainStateMobile extends AppStateMobile {
       return Hint(
           uid: doc.get('uid'),
           name: doc.get('name'),
-          description: doc.get('description'));
+          name_kz: doc.get('name_kz'),
+          description: doc.get('description'),
+          description_kz: doc.get('description_kz'));
     }).toList();
   }
 
@@ -135,7 +142,9 @@ class MainStateMobile extends AppStateMobile {
     return Hint(
         uid: snapshot.get('uid'),
         name: snapshot.get('name'),
-        description: snapshot.get('description'));
+        name_kz: snapshot.get('name_kz'),
+        description: snapshot.get('description'),
+        description_kz: snapshot.get('description_kz'));
   }
 
   Stream<Hint> get getHints {

@@ -44,7 +44,7 @@ class _PreviewHintState extends State<PreviewHint> {
             ),
             const SizedBox(height: 2),
             Text(
-              widget.hint.name,
+              widget.hint.name_kz ?? "Атауы жоқ",
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,

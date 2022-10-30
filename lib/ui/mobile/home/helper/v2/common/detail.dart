@@ -18,6 +18,8 @@ class DetailMobile extends StatefulWidget {
 class _DetailMobileState extends State<DetailMobile> {
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    debugPrint(myLocale.countryCode.toString());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -39,13 +41,17 @@ class _DetailMobileState extends State<DetailMobile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        board.name,
+                        myLocale.countryCode.toString() != "KZ"
+                            ? board.name
+                            : board.name_kz,
                         style: const TextStyle(
                             fontSize: 26, fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        board.description,
+                        myLocale.countryCode.toString() != "KZ"
+                            ? board.description
+                            : board.description_kz,
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w500),
                       )

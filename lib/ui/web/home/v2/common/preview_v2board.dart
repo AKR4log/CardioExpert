@@ -45,7 +45,7 @@ class _PreviewV2BoardState extends State<PreviewV2Board> {
             ),
             const SizedBox(height: 2),
             Text(
-              widget.v2board.name,
+              widget.v2board.name_kz ?? "Атауы жоқ",
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,

@@ -14,6 +14,8 @@ class PreviewV2BoardMobile extends StatefulWidget {
 class _PreviewV2BoardMobileState extends State<PreviewV2BoardMobile> {
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    debugPrint(myLocale.countryCode.toString());
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: TextButton(
@@ -42,7 +44,9 @@ class _PreviewV2BoardMobileState extends State<PreviewV2BoardMobile> {
             Flexible(
               flex: 3,
               child: Text(
-                widget.v2board.name,
+                myLocale.countryCode.toString() != "KZ"
+                    ? widget.v2board.name
+                    : widget.v2board.name_kz,
                 style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,

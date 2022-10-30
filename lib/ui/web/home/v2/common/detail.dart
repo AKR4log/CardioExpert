@@ -125,6 +125,45 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                                                           1))),
                                                 ),
                                               ),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 4),
+                                                child: const Text(
+                                                    "Введите новое название подсказки на русском",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 13,
+                                                    )),
+                                              ),
+                                              TextField(
+                                                controller: controllerName,
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          vertical: 10,
+                                                          horizontal: 15),
+                                                  hintText:
+                                                      "Зачем нужен Липидный Профиль?",
+                                                  hintStyle: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 15,
+                                                      color: Colors.black54),
+                                                  border: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Color.fromRGBO(
+                                                              229,
+                                                              231,
+                                                              235,
+                                                              1))),
+                                                ),
+                                              ),
                                               const SizedBox(height: 15),
                                               Container(
                                                 margin: const EdgeInsets.only(
@@ -134,6 +173,46 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                                         .translate(
                                                             'enter_new_description_for_hint'),
                                                     style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 13,
+                                                    )),
+                                              ),
+                                              TextField(
+                                                controller:
+                                                    controllerDescription,
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          vertical: 10,
+                                                          horizontal: 15),
+                                                  hintText:
+                                                      "Липидный Профиль позволяет...",
+                                                  hintStyle: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 15,
+                                                      color: Colors.black54),
+                                                  border: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Color.fromRGBO(
+                                                              229,
+                                                              231,
+                                                              235,
+                                                              1))),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 4),
+                                                child: const Text(
+                                                    "Введите новое описание подсказки",
+                                                    style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontSize: 13,
@@ -235,14 +314,14 @@ class _DetailV2BoardState extends State<DetailV2Board> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${AppLocalizations.of(context).translate('title')}: ${board.name}",
+                                    "${AppLocalizations.of(context).translate('title')}: ${board.name_kz ?? "Атауы жоқ"}",
                                     style: const TextStyle(
                                         fontSize: 26,
                                         fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(height: 15),
                                   Text(
-                                    "${AppLocalizations.of(context).translate('description')}: ${board.description}",
+                                    "${AppLocalizations.of(context).translate('description')}: ${board.description_kz ?? "Сипаттама жоқ"}",
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),

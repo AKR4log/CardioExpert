@@ -14,6 +14,8 @@ class PreviewListing extends StatefulWidget {
 class _PreviewListingState extends State<PreviewListing> {
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    debugPrint(myLocale.countryCode.toString());
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: TextButton(
@@ -41,7 +43,9 @@ class _PreviewListingState extends State<PreviewListing> {
             Flexible(
               flex: 3,
               child: Text(
-                widget.board.name,
+                myLocale.countryCode.toString() != "KZ"
+                    ? widget.board.name
+                    : widget.board.name_kz,
                 style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,

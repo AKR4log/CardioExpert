@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
                     create: (_) => MainStateMobile()),
               ],
             child: MaterialApp(
-              supportedLocales: const [Locale("ru", "RU"), Locale("kk", "KZ")],
+              supportedLocales: const [Locale("kk", "KZ")],
               locale: _locale,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
@@ -164,6 +164,7 @@ class _MyAppState extends State<MyApp> {
                 GlobalCupertinoLocalizations.delegate,
               ],
               localeResolutionCallback: (locale, supportedLocates) {
+                print(locale);
                 for (var supportedLocale in supportedLocates) {
                   if (supportedLocale.languageCode == locale.languageCode &&
                       supportedLocale.countryCode == locale.countryCode) {
