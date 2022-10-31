@@ -407,27 +407,21 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.black)),
                     ),
                   ),
-                  myLocale.countryCode.toString() != "KZ"
-                      ? TextButton(
-                          onPressed: () {
-                            Locale newLocale = const Locale('kk', 'KZ');
-                            MyApp.setLocale(context, newLocale);
-                          },
-                          child: const Text("Қазақшаға көш",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.blue)))
-                      : TextButton(
-                          onPressed: () {
-                            Locale newLocale = const Locale('ru', 'RU');
-                            MyApp.setLocale(context, newLocale);
-                          },
-                          child: const Text("Переключить на русский",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.blue))),
+                  TextButton(
+                      onPressed: () {
+                        if (myLocale.countryCode.toString() != "KZ") {
+                          Locale newLocale = const Locale('kk', 'KZ');
+                          MyApp.setLocale(context, newLocale);
+                        } else {
+                          Locale newLocale = const Locale('ru', 'RU');
+                          MyApp.setLocale(context, newLocale);
+                        }
+                      },
+                      child: const Text("Рус / Қаз",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blue))),
                   TextButton(
                       onPressed: () => FirebaseAuth.instance.signOut(),
                       child: Text(
