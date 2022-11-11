@@ -13,6 +13,7 @@ import 'package:cardio_expert/ui/mobile/home/reports.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'helper/home.dart';
 
@@ -423,7 +424,12 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.w500,
                               color: Colors.blue))),
                   TextButton(
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () async {
+                        final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.remove("Email");
+                        FirebaseAuth.instance.signOut();
+                      },
                       child: Text(
                           AppLocalizations.of(context).translate('log_out'),
                           style: const TextStyle(

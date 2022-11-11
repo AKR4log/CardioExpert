@@ -5,4 +5,5 @@ enum AuthStatus {
   REGISTER_NOW_USER,
   NOT_LOGGED_IN,
   LOGGED_IN,
+  RESET_PASSWORD,
 }

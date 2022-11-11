@@ -1,5 +1,6 @@
 import 'package:cardio_expert/localization.dart';
 import 'package:cardio_expert/ui/mobile/connect/reg/reg.dart';
+import 'package:cardio_expert/ui/mobile/connect/reset/reset.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,7 +61,7 @@ class _ConnectPageState extends State<ConnectPage> {
                       fontWeight: FontWeight.w700, fontSize: 18),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 19, bottom: 19),
+                  padding: const EdgeInsets.only(top: 19),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -72,6 +73,22 @@ class _ConnectPageState extends State<ConnectPage> {
                                       const RegPage())),
                           child: Text(AppLocalizations.of(context)
                               .translate('register'))),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 19),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      // TextButton(onPressed: () {}, child: const Text('Войти')),
+                      TextButton(
+                          onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const ResetPasswordPage())),
+                          child: Text(AppLocalizations.of(context)
+                              .translate('recover_password'))),
                     ],
                   ),
                 )

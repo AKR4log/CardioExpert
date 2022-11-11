@@ -56,6 +56,16 @@ class Cloud extends AppStateMobile {
     }
   }
 
+  Future<String> resetPassword({String email}) async {
+    return await _firebaseAuth
+        .sendPasswordResetEmail(email: email)
+        .then((value) {
+      return 'RESET_PASSWORD';
+    }).catchError((e) {
+      return e.toString();
+    });
+  }
+
   Future<String> signInUser(
       BuildContext context, String email, String password) async {
     try {
